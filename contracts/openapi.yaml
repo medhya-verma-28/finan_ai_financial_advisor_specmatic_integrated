@@ -1,0 +1,149 @@
+openapi: 3.0.3
+info:
+  title: Finan_AI Financial Advisor ML API
+  description: API Contract for checking Scikit-Learn predictions and Gemini API analytical advice responses.
+  version: 1.0.0
+paths:
+  /analyze:
+    post:
+      summary: Evaluate financial stability and extract budget recommendations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - query
+              properties:
+                query:
+                  type: string
+                  description: Raw textual natural language financial profile from the user.
+                  examples: 
+                    Non-empty Query:
+                      summary: "User has sent a non-empty query"
+                      value: "My monthly in-hand salary is ₹1,40,000. Core cost of living comes out to exactly ₹45,000 every month. I pay a monthly EMI of ₹15,000. Discretionary spending hits around ₹25,000 monthly. I commit a fixed ₹15,000 monthly towards healthcare. Total monthly expenditure has ballooned to ₹1,00,000. I currently have debt."
+                    Empty Query:
+                      summary: "User has sent an empty query"
+                      value: ""
+      responses:
+        '200':
+          description: Successful execution of langextract, Scikit-Learn classifiers, and Gemini generation pipelines.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - query
+                  - extracted_features
+                  - predictions
+                  - recommendations
+                  - gemini_report
+                properties:
+                  query:
+                    type: string
+                    description: Raw textual natural language financial profile from the user.
+                    examples: 
+                      Non-empty Query:
+                        summary: "User has sent a non-empty query"
+                        value: "My monthly in-hand salary is ₹1,40,000. Core cost of living comes out to exactly ₹45,000 every month. I pay a monthly EMI of ₹15,000. Discretionary spending hits around ₹25,000 monthly. I commit a fixed ₹15,000 monthly towards healthcare. Total monthly expenditure has ballooned to ₹1,00,000. I currently have debt."
+                      Empty Query:
+                        summary: "User has sent an empty query"
+                        value: ""
+                  
+                  extracted_features:
+                    type: object
+                    description: Features extracted from the text by langextract and mapped to your CSV structures.
+                    required:
+                      - monthly_income
+                      - cost_of_living
+                      - other_investments
+                      - consumerist_expenditure
+                      - crisis_shock_expenditure
+                      - total_monthly_expenditure
+                      - debt_status
+                    properties:
+                      monthly_income:
+                        type: integer
+                        example: 140000
+                      cost_of_living:
+                        type: integer
+                        example: 45000
+                      other_investments:
+                        type: integer
+                        example: 15000
+                      consumerist_expenditure:
+                        type: integer
+                        example: 25000
+                      crisis_shock_expenditure:
+                        type: integer
+                        example: 15000
+                      total_monthly_expenditure:
+                        type: integer
+                        example: 100000
+                      debt_status:
+                        type: string
+                        enum: ["In Debt", "Not in Debt"]
+                        example: "In Debt"
+                  
+                  predictions:
+                    type: object
+                    description: Multiclass predictions outputted by SVC models (model, model1, model2).
+                    required:
+                      - financial_state_category
+                      - current_monthly_income_enough
+                      - current_expenditure_worth_it
+                    properties:
+                      financial_state_category:
+                        enum: ["High-Rate Saver (>=25% in savings)", "Zero-Balance Living", "Low-Rate Saver (<25% in savings)", "Deficit Living"]
+                        example: "High-Rate Saver (>=25% in savings)"
+                      current_monthly_income_enough:
+                        enum: ["Yes", "No"]
+                        example: "Yes"
+                      current_expenditure_worth_it:
+                        enum: ["Yes", "No"]
+                        example: "No"
+                  
+                  recommendations:
+                    type: object
+                    description: Real value allocations predicted by your Random Forest Regressors (model3, model4, model5, model6).
+                    required:
+                      - suggested_cost_of_living
+                      - suggested_other_investments
+                      - suggested_consumerist_expenditure
+                      - suggested_crisis_shocks
+                    properties:
+                      suggested_cost_of_living:
+                        type: number
+                        format: float
+                        example: 42000.50
+                      suggested_other_investments:
+                        type: number
+                        format: float
+                        example: 20000.00
+                      suggested_consumerist_expenditure:
+                        type: number
+                        format: float
+                        example: 18000.25
+                      suggested_crisis_shocks:
+                        type: number
+                        format: float
+                        example: 15000.00
+                  
+                  gemini_report:
+                    type: string
+                    description: Generative advisory text summary synthesized by Gemini.
+                    example: "Based on your financial state metrics, your discretionary spending is highly elevated. We suggest reallocating ₹7,000 into investment routes..."
+        '404':
+          description: Query is missing or malformed.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - error
+                properties:
+                  error:
+                    type: string
+                    example: "Please provide a financial query."
+        
