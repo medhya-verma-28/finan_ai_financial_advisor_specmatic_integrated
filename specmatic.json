@@ -1,8 +1,12 @@
 {
-  "sources": [
-    {
-      "provider": "filesystem",
-      "directory": "contracts"
+  "version": 3,
+  "components": {
+    "sources": {
+      "localContracts": {
+        "filesystem": {
+          "directory": "contracts"
+        }
+      }
     }
-  ]
+  }
 }
