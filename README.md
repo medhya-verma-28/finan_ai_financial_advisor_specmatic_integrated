@@ -1,310 +1,438 @@
-# 🌐 Live Web Application
+## Introduction to Specmatic
 
-### **Finan - AI Financial Advisor**
+Specmatic is an OpenAPI-driven contract testing framework that automatically validates APIs against their specifications.
+
+Specmatic provides capabilities such as:
+
+Contract validation
+
+Automatic test generation
+
+Mock server creation
+
+Backward compatibility verification
+
+CI/CD integration
+
+Docker support
+
+Because Specmatic supports containerized execution, no local installation was required.
+
+--------------------------------------------------------------------
+
+## My Personal Project: Finan-AI Financial Advisor
+
+### (Recognised by GirlScript Summer of Code'26)
+
+### (Pull Request Link: https://github.com/Niketkumardheeryan/ML-CaPsule/pull/1926)
+
+### 🌐 Live Web Application
 
 🔗 **[https://finan-ai-financial-advisor.onrender.com](https://finan-ai-financial-advisor.onrender.com)**
 
 ---
 
-# Project Real Time Screen Recording
+### Project Real Time Screen Recording
 
 <video src="https://github.com/user-attachments/assets/c948476b-65f3-4bec-b683-51808127392b" width="100%" controls></video>
 
+### Personal Repository:
 
+https://github.com/medhya-verma-28/finan_ai_financial_advisor
 
-# 📌 Project Description
+### Problem Statement:
 
-Finan - AI Financial Advisor is a full-stack AI-powered web application developed to provide personalized financial insights based on user income, expenditure patterns, debt status, and overall financial condition. The system combines traditional machine learning models with Large Language Model (LLM) capabilities to deliver financial predictions along with contextual explanations and guidance.
+In India, living in metropolitan cities, big dreams, even FOMO or lack of financial literacy– there can be so many reasons because of which people suffer in managing their finances and then end up in financial crisis like debt trap, bankruptcy etc, leading to compromised financial security in future, or even hand-to-mouth situation.
 
-The project repository contains two major components:
+### Proposed Solution:
 
-* 📓 **Jupyter Notebook Version**
+An AI-Powered Financial Advisor that informs user about their current financial status (based on monthly income, expenditure and debt status). It also advices user on how to enhance their finance management skills and upgrade their financial status.
 
-  * Contains documented model development and experimentation workflow.
-  * Includes data preprocessing, feature engineering, model training, and evaluation.
+X-factor: Model would be trained according to Indian economic landscape. Financial status prediction and financial advice would be useful for Indian users.
 
-* 🌐 **Full-Stack Web Application**
+### Project Features:
 
-  * Integrates trained machine learning models with an interactive web interface.
-  * Provides authentication, cloud storage, and AI-generated explanations through Gemini.
+Financial State Prediction:
 
----
+Uses a trained machine learning model built on an Indian finance dataset.
+Predicts users' financial conditions based on:
+Monthly income
+Cost of living expenditure
+Investment expenditure
+Consumerist expenditure
+Crisis-related expenses
+Debt status
 
-# 🚀 Features
+India-Centric Financial Intelligence:
 
-### 💬 AI-Powered Financial Assistant
+Dataset reflects Indian economic and spending patterns.
+Models various financial categories such as:
+High-rate savers
+Low-rate savers
+Deficit living
+Zero Balance Living
 
-* Generates personalized financial advice and explanations.
-* Provides context-aware recommendations instead of only displaying predictions.
-* Uses Google Gemini to enhance interpretability of model outputs.
+The objective was to provide users with an interactive financial advisory assistant that transforms raw financial inputs into actionable insights.
 
-### 📊 Financial State Classification
+### Project Technology Stack:
 
-* Predicts the user's overall financial condition using a **Support Vector Classifier (SVC)**.
-* Classification is based on features such as:
+Backend
 
-  * Monthly income
-  * Cost of living expenditure
-  * Investment expenditure
-  * Consumerist spending
-  * Crisis-related expenses
-  * Debt status
+- Flask
 
-### 💰 Monthly Budget Prediction
+Machine Learning
 
-* Uses a **Random Forest Regressor** to estimate suitable monthly budget allocations.
-* Helps users understand spending patterns and maintain financial balance.
+- Scikit-learn
 
-### 🇮🇳 Indian Finance-Oriented Dataset
+- Random Forest Regressor
 
-* Models are trained on an Indian financial dataset representing realistic economic scenarios.
-* Captures diverse financial behaviors and spending patterns.
+- SVC Classifier
 
-### 🔐 User Authentication
+Frontend
 
-* Secure account registration and login through Firebase Authentication.
+- HTML
 
-### ☁️ Cloud-Based Storage
+- CSS
 
-* Firebase Cloud Storage integration for storing application assets and supporting resources.
+- JavaScript
 
-### 🌐 Browser-Based Accessibility
+Data Processing
 
-* Responsive web interface accessible without local installation.
-* Deployed on Render for public access.
+- Pandas
 
----
+- NumPy
 
-# 🧠 Machine Learning Components
+Text Response API
 
-## 📈 Financial State Prediction Model
+- Gemini API
 
-### Model Used
+Deployment
 
-* **Support Vector Classifier (SVC)**
+- Render
 
-### Purpose
+Contract Testing
 
-Classifies users into financial categories based on their income and expenditure characteristics.
+- Specmatic Studio
 
-### Input Parameters
+- OpenAPI Specification
 
-* Monthly income
-* Essential living expenses
-* Investment expenditure
-* Consumer expenditure
-* Crisis expenditure
-* Debt status
+CI/CD
 
-### Objective
+- GitHub Actions
 
-Provide an understanding of a user's current financial condition and spending behavior.
+--------------------------------------------------------------------
 
----
+## Why Contract Testing Was Added
 
-## 💵 Monthly Budget Estimation Model
+Although the application was functioning correctly, API contracts had not yet been formally validated.
 
-### Model Used
+Potential issues included:
 
-* **Random Forest Regressor**
+- Incorrect HTTP status codes.
 
-### Purpose
+- Unexpected response structures.
 
-Predicts a recommended monthly budget based on user financial attributes.
+- Value mismatches.
 
-### Objective
+- Breaking changes after future modifications.
 
-Assist users in planning and managing expenditures more effectively.
+Therefore, Specmatic contract testing was incorporated to enforce API correctness.
 
----
+--------------------------------------------------------------------
 
-# 🏗️ Tech Stack
+## Architecture of Contract Validation
 
-## 🐍 Backend
+API Contract & Examples
 
-* Python
-* Flask
+↓
 
-### Flask Responsibilities
+Flask Application
 
-* API handling
-* Server-side routing
-* Model inference
-* Integration with Gemini API
-* Authentication workflow support
+↓
 
----
+Docker Container
 
-## 🤖 Artificial Intelligence & Machine Learning
+↓
 
-* Scikit-learn
-* Support Vector Classifier (SVC)
-* Random Forest Regressor
-* Google Gemini API
+Isolated Docker Network
 
----
+↓
 
-## 🔥 Firebase Services
+OpenAPI Contract Validation
 
-### Firebase Authentication
+↓
 
-* Email-based authentication
-* Secure user identity management
+GitHub Actions CI Pipeline
 
-### Firebase Cloud Storage
+--------------------------------------------------------------------
 
-* Cloud-hosted storage for application resources
+## Specmatic COntract Testing Implementation:
 
----
+### Creating the API Contract & Examples
 
-## 🎨 Frontend
+An OpenAPI specification file named:
 
-* HTML5
-* CSS3
-* JavaScript
+openapi.yaml
 
----
+was created to formally describe the API behaviour.
 
-## ☁️ Deployment
+The specification included:
 
-* Render Cloud Platform
+POST /analyze endpoint
 
----
+Request schema
 
-# 📓 Jupyter Notebook Module
+Response schema
 
-The repository includes a notebook-based implementation containing:
+Required properties
 
-### 🧪 Data Preparation
+Status codes
 
-* Data cleaning
-* Feature engineering
-* Encoding and preprocessing
+Enum values
 
-### 📈 Model Training
+The specification acted as the source of truth for API behaviour.
 
-* Support Vector Classifier (SVC)
-* Random Forest Regressor
+Also, mock contract examples were also generated and stored for as JSON files in openapi_examples folder for contract testing.
 
-### 📊 Model Evaluation
+### Containerizing the Flask Application
 
-* Training workflow documentation
-* Performance analysis
-* Reproducible experimentation pipeline
+The application was first packaged into a Docker image.
 
-### 📚 Educational Purpose
+Building the image:
 
-* Allows contributors to understand model development and training procedures.
-* Provides transparency for experimentation and further improvements.
+docker build -t finan-ml-app .
 
----
+This image contained:
 
-# 🔒 Security Features
+Flask application
 
-## 🛡️ Firebase Authentication Security
+Trained ML models
 
-* Secure login and registration mechanism.
-* Authentication handled through Firebase services.
+Dependencies
 
----
+API implementation
 
-## 🔑 Firebase API Key Restrictions
+### Creating an Isolated Docker Network
 
-* Firebase API keys are restricted through **Google Cloud Console**.
-* Prevents unauthorized access and misuse.
-* Improves production-level security.
+To enable communication between containers, a dedicated Docker network was created.
 
----
+Command:
 
-## 🔐 Secure Gemini API Key Management
+docker network create financial-test-net
 
-* Gemini API credentials are **not hardcoded**.
-* Sensitive keys are stored securely using **Render Environment Variables**.
-* Keeps secrets separated from the application source code.
+This network served as an isolated bridge through which the Flask application and the Specmatic container could communicate.
 
----
 
-## 🚫 Secret Isolation
+### Starting the Flask Application Container
 
-* Configuration and credentials remain external to codebase.
-* Reduces risk of accidental exposure during development and deployment.
+The application container was launched inside the custom network.
 
----
+Command:
 
-# 🇮🇳 Dataset Characteristics
+docker run -d --name flask-ml-app-service --network financial-test-net -p 5000:5000 finan-ml-app
 
-The machine learning models are trained using an Indian finance dataset designed to represent practical financial situations involving:
+At this stage:
 
-* Monthly income levels
-* Cost of living expenditure
-* Investment expenses
-* Consumer spending behavior
-* Crisis and emergency expenses
-* Debt conditions
+The Flask application was running inside Docker.
 
-The dataset captures multiple financial categories such as:
+The service name "flask-ml-app-service" became accessible to other containers on the same network.
 
-* 📈 High-Rate Savers
-* 💹 Low-Rate Savers
-* ⚖️ Balanced Financial States
-* 💳 Debt-Driven Financial Conditions
-* 📉 Zero-Balance / Deficit Living States
+No external tunneling services were required.
 
----
+### Executing Contract Tests Using the Specmatic Docker Image
 
-# 🎨 User Interface Symbolism
+Instead of installing Specmatic locally, the official Specmatic container was used.
 
-### 🌱 Financial Growth and Stability
+The contracts directory and configuration file were mounted inside the container and tests were executed directly against the Flask container.
 
-The interface design emphasizes gradual financial improvement and responsible money management.
+Command:
 
----
+docker run --rm --name specmatic-runner --network financial-test-net `
 
-### 🤖 AI-Based Financial Guidance
+-v "${PWD}/contracts:/workspace/contracts" `
 
-The conversational layout represents an intelligent virtual financial assistant capable of translating machine learning predictions into understandable insights.
+-v "${PWD}/specmatic.json:/workspace/specmatic.json" `
 
----
+specmatic/specmatic:latest test "/workspace/contracts/openapi.yaml" --testBaseURL=http://flask-ml-app-service:5000
 
-### ⚖️ Balance Between Spending and Saving
+During execution, Specmatic performed the following operations:
 
-The UI reflects the relationship between:
+Loaded openapi.yaml.
 
-* Income generation
-* Essential expenditure
-* Investment habits
-* Consumer spending patterns
-* Debt management
+Generated test scenarios automatically.
 
-These factors collectively correspond to the features used by the underlying machine learning models.
+Sent requests to the Flask API container.
 
----
+Compared responses with the specification.
 
-### 📊 Data-Driven Decision Making
+Reported mismatches whenever deviations were detected.
 
-Visual elements are intended to communicate:
+Because both containers belonged to the same Docker network, communication occurred entirely inside Docker without exposing the application externally.
 
-* Financial awareness
-* Structured budgeting
-* Sustainable expenditure patterns
-* Long-term financial planning
+--------------------------------------------------------------------
 
----
+## Initial Contract Failures
 
-# ⚙️ Architecture Highlights
+During early executions, several inconsistencies were discovered.
 
-* 📓 Documented notebook implementation for reproducible model development.
-* 🌐 Full-stack Flask-based web application.
-* 📈 SVC model for financial state classification.
-* 💰 Random Forest Regressor for monthly budget prediction.
-* 🤖 Gemini-powered explanation layer.
-* 🔥 Firebase Authentication and Cloud Storage integration.
-* 🔒 Google Cloud API restrictions for Firebase security.
-* ☁️ Secure secret management through Render environment variables.
-* 🚀 Public deployment on Render.
+### Failure 1: HTTP Status Mismatch
 
----
+Specmatic reported:
 
-# 🎯 Project Objective
+R0002: HTTP status mismatch
 
-To develop a secure and accessible AI-assisted financial advisory platform that combines **machine learning, generative AI, and cloud technologies** to help users better understand their financial condition, estimate budgets, and make informed financial decisions based on Indian economic and spending patterns.
+Specmatic expected:
+
+200 OK
+
+However, the API returned:
+
+500 Internal Server Error
+
+The validation output indicated:
+
+"Specification expected status 200 but response contained status 500."
+
+This issue demonstrated that the implementation and contract were inconsistent.
+
+The backend code in app.py was investigated.
+
+The condition checking whether Gemini API key exists or not, was removed from app.py as contract testing generates mock requests, so API key is not required.
+
+This condition was responsible for sending 500 status which failed the contract test.
+
+Thus, after app.py was corrected, the endpoint consistently returned the expected status code and the status mismatch was resolved.
+
+### Failure 2: Value Mismatch
+
+Once the status issue had been fixed, another contract violation appeared.
+
+Specmatic reported:
+
+R1002: Value mismatch
+
+The specification expected one of:
+
+- High-Rate Saver (>=25% in savings)
+
+- Zero-Balance Living
+
+- Low-Rate Saver (<25% in savings)
+
+- Deficit Living
+
+However, the API returned:
+
+Stable
+
+The response field:
+
+predictions.financial_state_category
+
+did not conform to the values defined in the OpenAPI contract.
+
+This mismatch clearly illustrated one of the major advantages of contract testing: even though the endpoint was operational, the response semantics were inconsistent with the specification.
+
+--------------------------------------------------------------------
+
+## Bringing the Specification and Implementation into Alignment
+
+To eliminate the mismatch, modifications were introduced in:
+
+openapi.yaml
+
+The contract definitions were refined to represent the expected response schema.
+
+app.py
+
+The response generation logic was updated so that the output matched the values defined by the specification.
+
+Particular attention was paid to:
+
+- Response structure.
+
+- Status codes.
+
+- Nested JSON fields.
+
+- Enumerated category values.
+
+By synchronizing both files, the implementation and contract were brought into agreement.
+
+--------------------------------------------------------------------
+
+## Achieving Successful Contract Validation
+
+After the changes had been introduced, the tests were executed again.
+
+Specmatic Studio reported:
+
+Tests run: 2
+
+Success: 2
+
+Failed: 0
+
+Errors: 0
+
+Skipped: 0
+
+Coverage: 100%
+
+The /analyze endpoint achieved complete contract coverage.
+
+The successful execution confirmed that:
+
+- Response schema was correct.
+
+- Status codes matched.
+
+- Enumerated values were valid.
+
+- API behavior complied with the OpenAPI specification.
+
+Thus, all contract tests ran successfully on local.
+
+--------------------------------------------------------------------
+
+## Pushing the Changes to GitHub
+
+A dedicated repository was created for the Specmatic-enabled version:
+
+https://github.com/medhya-verma-28/finan_ai_financial_advisor_specmatic_integrated
+
+The repository contains:
+
+- Flask application.
+
+- Docker configuration.
+
+- OpenAPI specification.
+
+- Specmatic setup.
+
+- GitHub Actions workflow.
+
+--------------------------------------------------------------------
+
+## Automating Contract Testing with GitHub Actions
+
+Contract validation should not depend solely on manual execution.
+
+Therefore, a CI workflow was configured using GitHub Actions.
+
+Whenever code is pushed:
+
+1. Workflow execution starts.
+
+2. Dependencies are installed.
+
+3. Contract tests are executed.
+
+4. Results are validated automatically.
+
+This process ensures that future changes cannot unintentionally break API behavior.
+
+The cloud runner executed the workflow successfully, confirming that the application remained compliant with its contract even outside the local development environment.
+
+--------------------------------------------------------------------

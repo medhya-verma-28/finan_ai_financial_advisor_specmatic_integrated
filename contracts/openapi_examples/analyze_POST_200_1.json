@@ -1,0 +1,45 @@
+{
+    "http-request": {
+        "path": "/analyze",
+        "method": "POST",
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "body": {
+            "query": "possimus"
+        },
+        "description": "This is an example of a request to input a non-empty query at the /analyze endpoint"
+    },
+    "http-response": {
+        "status": 200,
+        "body": {
+            "query": "ipsam",
+            "extracted_features": {
+                "monthly_income": 909,
+                "cost_of_living": 958,
+                "other_investments": 795,
+                "consumerist_expenditure": 489,
+                "crisis_shock_expenditure": 391,
+                "total_monthly_expenditure": 266,
+                "debt_status": "In Debt"
+            },
+            "predictions": {
+                "financial_state_category": "High-Rate Saver (>=25% in savings)",
+                "current_monthly_income_enough": "Yes",
+                "current_expenditure_worth_it": "Yes"
+            },
+            "recommendations": {
+                "suggested_cost_of_living": 418.0,
+                "suggested_other_investments": 946.0,
+                "suggested_consumerist_expenditure": 339.0,
+                "suggested_crisis_shocks": 564.0
+            },
+            "gemini_report": "occaecati"
+        },
+        "status-text": "OK",
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "description": "This is an example of a response after inputting a non-empty query at the /analyze endpoint "
+    }
+}
