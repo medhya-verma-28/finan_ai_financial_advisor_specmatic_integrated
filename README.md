@@ -166,7 +166,7 @@ GitHub Actions CI Pipeline
 
 --------------------------------------------------------------------
 
-## Specmatic COntract Testing Implementation:
+## Specmatic Contract Testing Implementation:
 
 ### Creating the API Contract & Examples
 
