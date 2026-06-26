@@ -140,7 +140,7 @@ Therefore, Specmatic contract testing was incorporated to enforce API correctnes
 
 --------------------------------------------------------------------
 
-## Architecture of Contract Validation
+## Architecture of Specmatic Integration
 
 API Contract & Examples
 
@@ -200,7 +200,7 @@ The application was first packaged into a Docker image.
 
 Building the image:
 
-docker build -t finan-ml-app .
+```docker build -t finan-ml-app .```
 
 This image contained:
 
@@ -218,7 +218,7 @@ To enable communication between containers, a dedicated Docker network was creat
 
 Command:
 
-docker network create financial-test-net
+```docker network create financial-test-net```
 
 This network served as an isolated bridge through which the Flask application and the Specmatic container could communicate.
 
@@ -229,7 +229,7 @@ The application container was launched inside the custom network.
 
 Command:
 
-docker run -d --name flask-ml-app-service --network financial-test-net -p 5000:5000 finan-ml-app
+```docker run -d --name flask-ml-app-service --network financial-test-net -p 5000:5000 finan-ml-app```
 
 At this stage:
 
@@ -247,13 +247,7 @@ The contracts directory and configuration file were mounted inside the container
 
 Command:
 
-docker run --rm --name specmatic-runner --network financial-test-net `
-
--v "${PWD}/contracts:/workspace/contracts" `
-
--v "${PWD}/specmatic.json:/workspace/specmatic.json" `
-
-specmatic/specmatic:latest test "/workspace/contracts/openapi.yaml" --testBaseURL=http://flask-ml-app-service:5000
+```docker run --rm --name specmatic-runner --network financial-test-net -v '${PWD}/contracts:/workspace/contracts' -v '${PWD}/specmatic.json:/workspace/specmatic.json' specmatic/specmatic:latest test '/workspace/contracts/openapi.yaml' --testBaseURL=http://flask-ml-app-service:5000```
 
 During execution, Specmatic performed the following operations:
 
@@ -395,6 +389,54 @@ Thus, all contract tests ran successfully on local.
 
 --------------------------------------------------------------------
 
+## Why Schema Resiliency Tests Were Added
+
+Traditional contract testing verifies whether an API implementation conforms to the expected specification at a particular point in time. While this ensures that producers and consumers remain aligned, it does not fully address the challenges introduced by evolving APIs and AI-driven applications.
+
+As Finan AI Financial Advisor continues to evolve, API responses may occasionally contain additional optional fields, reordered properties, or non-breaking structural changes introduced during feature enhancements. Strict schema validation alone can sometimes cause these benign changes to be interpreted as failures, resulting in unnecessary maintenance overhead and brittle integrations.
+
+Schema Resiliency Testing was therefore introduced to evaluate how well the API behaves under realistic schema evolution scenarios while still preserving backward compatibility guarantees. The objective was to ensure that consumers depending on the API would remain unaffected by additive and non-breaking modifications to the response structure.
+
+The addition of Schema Resiliency Tests provides several advantages:
+
+* Validation of API behavior under evolving schemas.
+* Early detection of potentially breaking changes.
+* Improved backward compatibility assurance.
+* Increased confidence during feature releases and refactoring.
+* Reduced integration fragility for API consumers.
+* Stronger support for continuous delivery practices.
+
+By complementing traditional contract testing with schema resiliency validation, the Finan AI Financial Advisor API becomes more robust, future-proof, and resilient to incremental changes introduced during development.
+
+## Specmatic Schema Resiliency Tests Implementation Along with Contract Testing
+
+After implementing only contract tests, following changes were made to the codebase:
+
+- Added specmatic.yaml file to implement contract tests and schema resiliency tests together
+- Added 400 Bad Request external example to include the scenario of null object request data
+- Updated app.py and openapi.yaml based on the newly added external example
+
+### Initial Test Failures
+
+On running tests initially, automatic 415 Unsupported Media Type error was faced.
+
+Command:
+
+```docker run --rm --name specmatic-runner --network financial-test-net -v "${PWD}:/usr/src/app" specmatic/specmatic:latest test```
+
+The result is shown below:
+
+<img width="578" height="106" alt="WhatsApp Image 2026-06-26 at 1 58 26 PM" src="https://github.com/user-attachments/assets/f6275af2-f3ae-44cc-82bc-7d62c7653784" />
+
+The above failed test was turned into a successful one by adding the 'force' argument in request.get_json() method to prevent the crashes.
+Code implemention is shared below:
+
+```data = request.get_json(force=True, silent=True) or {}```
+
+On running tests again, 100% success was achieved.
+
+<img width="648" height="91" alt="WhatsApp Image 2026-06-26 at 2 10 49 PM" src="https://github.com/user-attachments/assets/37236a7e-9871-4c2a-a7c0-582ec06801b9" />
+
 ## Pushing the Changes to GitHub
 
 A dedicated repository was created for the Specmatic-enabled version:
@@ -415,7 +457,7 @@ The repository contains:
 
 --------------------------------------------------------------------
 
-## Automating Contract Testing with GitHub Actions
+## Automating Contract Testing and Schema Resiliency Testing with GitHub Actions
 
 Contract validation should not depend solely on manual execution.
 
@@ -427,7 +469,7 @@ Whenever code is pushed:
 
 2. Dependencies are installed.
 
-3. Contract tests are executed.
+3. Contract tests and Schema Resiliency tests are executed.
 
 4. Results are validated automatically.
 
