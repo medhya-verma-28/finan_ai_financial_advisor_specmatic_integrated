@@ -1,0 +1,19 @@
+{
+  "http-request": {
+    "method": "POST",
+    "path": "/analyze",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {}
+  },
+  "http-response": {
+    "status": 400,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "error": "Query not provided. Please provide a financial query."
+    }
+  }
+}

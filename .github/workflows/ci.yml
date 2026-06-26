@@ -11,33 +11,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # 1. Pull down your repository code files
+    # 1. Pulled down the repository code files
     - name: Checkout Code Repository
       uses: actions/checkout@v4
 
-    # 2. Build your Flask ML Application container image locally in CI
+    # 2. Built Flask ML Application container image locally in CI
     - name: Build Application Docker Image
       run: docker build -t finan-ml-app .
 
-    # 3. Create an isolated container network bridge inside GitHub runner
+    # 3. Created an isolated container network bridge inside GitHub runner
     - name: Create Test Network
       run: docker network create financial-test-net
 
-    # 4. Boot up your Flask application forced into testing environment mode
+    # 4. Boot up the Flask application forced into testing environment mode
     - name: Start Flask App Container
       run: |
-        docker run -d \
-          --name flask-ml-service \
-          --network financial-test-net \
-          -p 5000:5000 \
-          finan-ml-app
+        docker run -d --name flask-ml-app-service --network financial-test-net -p 5000:5000 finan-ml-app
 
-    # 5. Execute Specmatic directly to test your app container inside the network
-    - name: Run Specmatic Contract Verification
+    # 5. Execute Specmatic directly to test the app container inside the network
+    - name: Run Specmatic Resiliency and Contract Tests
       run: |
         docker run --rm \
           --name specmatic-runner \
           --network financial-test-net \
-          -v "${{ github.workspace }}/contracts:/workspace/contracts" \
-          -v "${{ github.workspace }}/specmatic.json:/workspace/specmatic.json" \
-          specmatic/specmatic:latest test "/workspace/contracts/openapi.yaml" --testBaseURL=http://flask-ml-service:5000
+          -v "${{ github.workspace }}/specmatic.yaml:/usr/src/app/specmatic.yaml" \
+          -v "${{ github.workspace }}/contracts:/usr/src/app/contracts" \
+          specmatic/specmatic:latest test

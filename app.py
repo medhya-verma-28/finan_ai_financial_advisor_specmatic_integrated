@@ -236,18 +236,23 @@ def index():
 
 @app.route('/analyze', methods=['POST'])
 def analyze():
-    data = request.get_json() or {}
+    data = request.get_json(force=True, silent=True) or {}
+    if data == {}:
+        response_payload = {
+            "error": "Query format not supported. Please provide a financial query in correct format."
+        }
+        return jsonify(response_payload), 400
     query = data.get('query', '')
     if isinstance(query, str):
         query = query.strip()
     else:
-        query = ''
+        query = ""
 
     try:
         if os.environ.get('FLASK_ENV') == 'testing':
             if not query:
                 response_payload = {
-                    "error": "Query not provided. Please provide a financial query."
+                    "error": "Query is empty. Please provide a valid financial query."
                 }
                 return jsonify(response_payload), 404
             else:

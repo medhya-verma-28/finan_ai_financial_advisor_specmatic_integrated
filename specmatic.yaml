@@ -1,0 +1,31 @@
+version: 3
+
+components:
+  sources:
+    localProjectFiles:
+      filesystem:
+        directory: .
+
+systemUnderTest:
+  service:
+    definitions:
+      - definition:
+          source:
+            $ref: "#/components/sources/localProjectFiles"
+          specs:
+            - contracts/openapi.yaml
+    runOptions:
+      openapi:
+        type: test
+        baseUrl: "${APP_URL:http://flask-ml-app-service:5000}"
+    data:
+      examples:
+        - directories:
+            - ./contracts/openapi_examples
+
+specmatic:
+  settings:
+    test:
+      schemaResiliencyTests: all      
+    mock:
+      generative: true

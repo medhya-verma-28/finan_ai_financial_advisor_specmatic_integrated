@@ -28,8 +28,11 @@ paths:
               analyze_POST_404_1:
                 summary: Example of a failed request with an empty query
                 value:
-                  query: ""        
-                  
+                  query: ""
+              analyze_POST_400_1:
+                summary: Example of a failed request with a null query
+                value:
+                  query: null
       responses:
         '200':
           description: Successful execution of langextract, Scikit-Learn classifiers, and Gemini generation pipelines.
@@ -155,7 +158,7 @@ paths:
                       suggested_crisis_shocks: 15000.00
                     gemini_report: "Based on your financial state metrics, your discretionary spending is highly elevated. We suggest reallocating ₹7,000 into investment routes..."      
         '404':
-          description: Query is missing or malformed.
+          description: Empty query provided.
           content:
             application/json:
               schema:
@@ -165,10 +168,28 @@ paths:
                 properties:
                   error:
                     type: string
-                    example: "Please provide a financial query."
+                    example: "Empty query provided. Please provide a financial query."
               examples:
                 analyze_POST_404_1:
                   summary: Example of a failed response with an empty query
                   value:
-                    error: "Please provide a financial query."      
+                    error: "Empty query provided. Please provide a financial query."   
+        '400':
+          description: Query is null object.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - error
+                properties:
+                  error:
+                    type: string
+                    example: "Query format not supported. Please provide a financial query in correct format."
+              examples:
+                analyze_POST_400_1:
+                  summary: Example of a failed response with a null query
+                  value:
+                    error: "Query format not supported. Please provide a financial query in correct format."
+
         
