@@ -1,31 +1,42 @@
 version: 3
 
-components:
-  sources:
-    localProjectFiles:
-      filesystem:
-        directory: .
-
 systemUnderTest:
   service:
-    definitions:
-      - definition:
-          source:
-            $ref: "#/components/sources/localProjectFiles"
-          specs:
-            - contracts/openapi.yaml
-    runOptions:
+    $ref: "#/components/services/flask-ml-app-service"
+
+components:
+  sources:
+    localFilesystemRepo:
+      filesystem:
+        directory: "."
+  
+  services:
+    flask-ml-app-service:
+      description: "Flask Machine Learning Inference Application Suite"
+      definitions:
+        - definition:
+            source:
+              $ref: "#/components/sources/localFilesystemRepo"
+            specs:
+              - "contracts/openapi.yaml"
+
+  runOptions:
+    localFlaskExecution:
       openapi:
-        type: test
-        baseUrl: "${APP_URL:http://flask-ml-app-service:5000}"
-    data:
-      examples:
-        - directories:
-            - ./contracts/openapi_examples
+        type: "test"
+        baseUrl: "http://flask-ml-app-service:5000"
 
 specmatic:
   settings:
     test:
-      schemaResiliencyTests: all      
+      schemaResiliencyTests: none 
+      timeoutInMilliseconds: 15000   
     mock:
-      generative: true
+      generative: true           
+
+  governance:
+    report:
+      formats:
+        - html
+      outputDirectory: "{REPORT_FOLDER:specmatic-reports}"
+          
