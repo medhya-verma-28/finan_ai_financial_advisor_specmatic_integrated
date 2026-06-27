@@ -2,9 +2,9 @@ name: Specmatic Contract and Resiliency Tests
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [main]
   pull_request:
-    branches: [ main, master ]
+    branches: [main]
 
 jobs:
   specmatic-tests:
@@ -20,6 +20,18 @@ jobs:
           mkdir -p build/reports/specmatic-resiliency-tests/test/xml
           # Grant writing permissions to the docker container workspace
           chmod -R 777 build
+
+      - name: Build Application Docker Image
+        run: docker build -t finan-ml-app .
+
+    # 3. Created an isolated container network bridge inside GitHub runner
+      - name: Create Test Network
+        run: docker network create financial-test-net
+
+    # 4. Boot up the Flask application forced into testing environment mode
+      - name: Start Flask App Container
+        run: |
+          docker run -d --name flask-ml-app-service --network financial-test-net -p 5000:5000 finan-ml-app
 
       - name: Run Standard Contract Tests
         run: |
