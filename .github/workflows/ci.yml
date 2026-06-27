@@ -36,7 +36,7 @@ jobs:
       - name: Run Standard Contract Tests
         run: |
           docker run --rm \
-            --network host \
+            --network financial-test-net \
             -e REPORT_FOLDER="build/reports/specmatic-contract-tests" \
             -v "${{ github.workspace }}:/usr/src/app" \
             specmatic/specmatic:latest test \
@@ -47,7 +47,7 @@ jobs:
         if: always() # Run even if standard contract tests fail
         run: |
           docker run --rm \
-            --network host \
+            --network financial-test-net \
             -e REPORT_FOLDER="build/reports/specmatic-resiliency-tests" \
             -e SPECMATIC_SETTINGS_TEST_SCHEMAPRESILIENCYTESTS="all" \
             -v "${{ github.workspace }}:/usr/src/app" \
