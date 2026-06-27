@@ -437,6 +437,65 @@ On running tests again, 100% success was achieved.
 
 <img width="648" height="91" alt="WhatsApp Image 2026-06-26 at 2 10 49 PM" src="https://github.com/user-attachments/assets/37236a7e-9871-4c2a-a7c0-582ec06801b9" />
 
+## Separating Contract and Schema Resiliency Test Reports
+
+Junit was used to separate both XML test reports.
+Since the Specmatic version used in this project does not allow to separate HTML test reports through run commands, we add a report folder directory variable in specmatic.yaml and set its value in run command of each test.
+
+## Final Step-by-step Command Execution to Run Contract and Schema Resiliency Tests (Reports saved separately)
+
+### Forcefully delete any running Docker containers with the same name:
+
+```docker rm -f flask-ml-app-service```
+
+### Build the latest Flask Application adter pulling latest changes from this repo:
+
+```docker build -t finan-ml-app .```
+
+### Create a docker network:
+
+```docker network create financial-test-net```
+
+### Run Flask App Container:
+
+```docker run -d --name flask-ml-app-service --network financial-test-net -p 5000:5000 finan-ml-app```
+
+### Run Contract Tests and Save Report in build/reports/specmatic-contract-tests:
+
+Ensure that the Report folder directory environment variable is declared before running tests.
+
+```$env:REPORT_FOLDER="build/reports/specmatic-contract-tests"```
+
+```docker run --rm --name specmatic-contract-runner --network financial-test-net -e REPORT_FOLDER=$env:REPORT_FOLDER -v "${PWD}:/usr/src/app" specmatic/specmatic:latest test --testBaseURL=http://flask-ml-app-service:5000 --junitReportDir=/usr/src/app/build/reports/specmatic-contract-tests/test/xml```
+
+100% Success is achieved as follows:
+
+Tests run: 3
+Success: 3
+Failed: 0
+Skipped: 0
+Error: 0
+WIP: 0
+
+### Run Contract Tests and Save Report in build/reports/specmatic-resiliency-tests:
+
+```$env:REPORT_FOLDER="build/reports/specmatic-resiliency-tests"```
+
+```docker run --rm --name specmatic-resiliency-runner --network financial-test-net -e REPORT_FOLDER=$env:REPORT_FOLDER -v "${PWD}:/usr/src/app" specmatic/specmatic:latest test --testBaseURL=http://flask-ml-app-service:5000 --junitReportDir=/usr/src/app/build/reports/specmatic-resiliency-tests/test/xml```
+
+100% Success is achieved as follows:
+
+Tests run: 3
+Success: 3
+Failed: 0
+Skipped: 0
+Error: 0
+WIP: 0
+
+FINALLY, BOTH CONTRACT AND SCHEMA RESILIENCY TESTS RAN SUCCESSFULLY!
+
+TEST REPORTS HAVE BEEN SAVED IN SEPARATE DIRECTORIES AS WELL!
+
 ## Pushing the Changes to GitHub
 
 A dedicated repository was created for the Specmatic-enabled version:
