@@ -1,5 +1,6 @@
-<testsuite errors="0" failures="0" hostname="af9f53e2dd21" name="Contract Tests" skipped="0" tests="3" time="2.021" timestamp="2026-06-27T09:05:30">
+<testsuite errors="0" failures="0" hostname="ed1c7b5994d8" name="Contract Tests" skipped="0" tests="3" time="2.887" timestamp="2026-06-28T19:05:01">
 <properties>
+<property name="CONFIG_FILE_PATH" value="/usr/src/app/specmatic_contract.yaml"/>
 <property name="file.encoding" value="ANSI_X3.4-1968"/>
 <property name="file.separator" value="/"/>
 <property name="java.class.path" value="/usr/local/share/specmatic/specmatic.jar"/>
@@ -39,7 +40,7 @@
 <property name="sun.boot.library.path" value="/usr/lib/jvm/java-17-openjdk/lib"/>
 <property name="sun.cpu.endian" value="little"/>
 <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
-<property name="sun.java.command" value="/usr/local/share/specmatic/specmatic.jar test --testBaseURL=http://flask-ml-app-service:5000 --junitReportDir=/usr/src/app/build/reports/specmatic-contract-tests/test/xml"/>
+<property name="sun.java.command" value="/usr/local/share/specmatic/specmatic.jar test --config=/usr/src/app/specmatic_contract.yaml --testBaseURL=http://flask-ml-app-service:5000 --junitReportDir=/usr/src/app/build/reports/specmatic-contract-tests/test/xml"/>
 <property name="sun.java.launcher" value="SUN_STANDARD"/>
 <property name="sun.jnu.encoding" value="ANSI_X3.4-1968"/>
 <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
@@ -50,19 +51,19 @@
 <property name="user.name" value="root"/>
 <property name="user.timezone" value="GMT"/>
 </properties>
-<testcase classname="io.specmatic.test.SpecmaticJUnitSupport" name="Contract Tests &gt; SpecmaticJUnitSupport &gt; contractTest() &gt; Scenario: POST /analyze -&gt; 200 with the request from the example 'analyze_POST_200_1'" time="0.134">
+<testcase classname="io.specmatic.test.SpecmaticJUnitSupport" name="Contract Tests &gt; SpecmaticJUnitSupport &gt; contractTest() &gt; Scenario: POST /analyze -&gt; 200 with the request from the example 'analyze_POST_200_1'" time="0.169">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:io.specmatic.test.SpecmaticJUnitSupport]/[test-factory:contractTest()]/[dynamic-test:#1]
 display-name: Contract Tests > SpecmaticJUnitSupport > contractTest() > Scenario: POST /analyze -> 200 with the request from the example 'analyze_POST_200_1'
 ]]></system-out>
 </testcase>
-<testcase classname="io.specmatic.test.SpecmaticJUnitSupport" name="Contract Tests &gt; SpecmaticJUnitSupport &gt; contractTest() &gt; Scenario: POST /analyze -&gt; 404 with the request from the example 'analyze_POST_404_1'" time="0.009">
+<testcase classname="io.specmatic.test.SpecmaticJUnitSupport" name="Contract Tests &gt; SpecmaticJUnitSupport &gt; contractTest() &gt; Scenario: POST /analyze -&gt; 404 with the request from the example 'analyze_POST_404_1'" time="0.012">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:io.specmatic.test.SpecmaticJUnitSupport]/[test-factory:contractTest()]/[dynamic-test:#2]
 display-name: Contract Tests > SpecmaticJUnitSupport > contractTest() > Scenario: POST /analyze -> 404 with the request from the example 'analyze_POST_404_1'
 ]]></system-out>
 </testcase>
-<testcase classname="io.specmatic.test.SpecmaticJUnitSupport" name="Contract Tests &gt; SpecmaticJUnitSupport &gt; contractTest() &gt; Scenario: POST /analyze -&gt; 400 with the request from the example 'analyze_POST_400_1'" time="0.012">
+<testcase classname="io.specmatic.test.SpecmaticJUnitSupport" name="Contract Tests &gt; SpecmaticJUnitSupport &gt; contractTest() &gt; Scenario: POST /analyze -&gt; 400 with the request from the example 'analyze_POST_400_1'" time="0.017">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:io.specmatic.test.SpecmaticJUnitSupport]/[test-factory:contractTest()]/[dynamic-test:#3]
 display-name: Contract Tests > SpecmaticJUnitSupport > contractTest() > Scenario: POST /analyze -> 400 with the request from the example 'analyze_POST_400_1'

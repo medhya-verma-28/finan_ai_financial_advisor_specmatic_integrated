@@ -38,5 +38,5 @@ specmatic:
     report:
       formats:
         - html
-      outputDirectory: "{REPORT_FOLDER:specmatic-reports}"
+      outputDirectory: "build/reports/specmatic-contract-tests"
           

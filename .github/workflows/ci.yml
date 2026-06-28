@@ -35,26 +35,22 @@ jobs:
 
       - name: Run Standard Contract Tests
         run: |
-         docker run --rm --name specmatic-contract-runner \
-         --network financial-test-net \
-         -e REPORT_FOLDER=/usr/src/app/build/reports/specmatic-contract-tests \
-         -v "${PWD}:/usr/src/app" \
-         specmatic/specmatic:latest test /usr/src/app/specmatic.yaml \
-         --testBaseURL=http://flask-ml-app-service:5000 \
-         --junitReportDir=/usr/src/app/build/reports/specmatic-contract-tests/test/xml
-
-
+          docker run --rm --name specmatic-contract-runner \
+          --network financial-test-net \
+          -v "${{ github.workspace }}:/usr/src/app" \
+          specmatic/specmatic:latest test --config=/usr/src/app/specmatic_contract.yaml \
+          --testBaseURL=http://flask-ml-app-service:5000 \
+          --junitReportDir=/usr/src/app/build/reports/specmatic-contract-tests/test/xml
 
       - name: Run Schema Resiliency Tests
-        if: always() # Run even if standard contract tests fail
+        if: always()  # This ensures resiliency tests run even if standard tests find failures
         run: |
-         docker run --rm --name specmatic-resiliency-runner \
-         --network financial-test-net \
-         -e REPORT_FOLDER=/usr/src/app/build/reports/specmatic-resiliency-tests \
-         -v "${PWD}:/usr/src/app" \
-         specmatic/specmatic:latest test /usr/src/app/specmatic_resiliency.yaml \
-         --testBaseURL=http://flask-ml-app-service:5000 \
-         --junitReportDir=/usr/src/app/build/reports/specmatic-resiliency-tests/test/xml
+          docker run --rm --name specmatic-resiliency-runner \
+          --network financial-test-net \
+          -v "${{ github.workspace }}:/usr/src/app" \
+          specmatic/specmatic:latest test --config=/usr/src/app/specmatic_resiliency.yaml \
+          --testBaseURL=http://flask-ml-app-service:5000 \
+          --junitReportDir=/usr/src/app/build/reports/specmatic-resiliency-tests/test/xml
 
 
       - name: Upload Test Report Artifacts
