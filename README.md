@@ -440,7 +440,7 @@ On running tests again, 100% success was achieved.
 ## Separating Contract and Schema Resiliency Test Reports
 
 Junit was used to separate both XML test reports.
-Since the Specmatic version used in this project does not allow to separate HTML test reports through run commands, we add a report folder directory variable in specmatic.yaml and set its value in run command of each test.
+Since the Specmatic version used in this project (Specmatic v2.48.0) does not allow to separate HTML test reports through run commands, we add a report folder directory variable in specmatic.yaml and set its value in run command of each test.
 
 ## Final Step-by-step Command Execution to Run Contract and Schema Resiliency Tests (Reports saved separately)
 
