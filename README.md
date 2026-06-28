@@ -466,7 +466,8 @@ Ensure that the Report folder directory environment variable is declared before 
 
 ```$env:REPORT_FOLDER="build/reports/specmatic-contract-tests"```
 
-```docker run --rm --name specmatic-contract-runner --network financial-test-net -e REPORT_FOLDER=$env:REPORT_FOLDER -v "${PWD}:/usr/src/app" specmatic/specmatic:latest test --testBaseURL=http://flask-ml-app-service:5000 --junitReportDir=/usr/src/app/build/reports/specmatic-contract-tests/test/xml```
+```docker run --rm --name specmatic-contract-runner --network financial-test-net -e REPORT_FOLDER=$env:REPORT_FOLDER -v "${PWD}:/usr/src/app" specmatic/specmatic:latest test --testBaseURL=http://flask-ml-app-service:5000 --junitReportDir=/usr/src/app/build/reports/specmatic-contract-tests/test/xml --schemaResiliencyTests=none
+```
 
 100% Success is achieved as follows:
 
@@ -481,7 +482,8 @@ WIP: 0
 
 ```$env:REPORT_FOLDER="build/reports/specmatic-resiliency-tests"```
 
-```docker run --rm --name specmatic-resiliency-runner --network financial-test-net -e REPORT_FOLDER=$env:REPORT_FOLDER -v "${PWD}:/usr/src/app" specmatic/specmatic:latest test --testBaseURL=http://flask-ml-app-service:5000 --junitReportDir=/usr/src/app/build/reports/specmatic-resiliency-tests/test/xml```
+```docker run --rm --name specmatic-resiliency-runner --network financial-test-net -e REPORT_FOLDER=$env:REPORT_FOLDER -v "${PWD}:/usr/src/app" specmatic/specmatic:latest test --testBaseURL=http://flask-ml-app-service:5000 --junitReportDir=/usr/src/app/build/reports/specmatic-resiliency-tests/test/xml --schemaResiliencyTests=all --contractTests=none
+```
 
 100% Success is achieved as follows:
 
