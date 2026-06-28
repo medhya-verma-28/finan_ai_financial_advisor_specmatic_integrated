@@ -49,7 +49,7 @@ jobs:
           docker run --rm \
             --network financial-test-net \
             -e REPORT_FOLDER="build/reports/specmatic-resiliency-tests" \
-            -e SPECMATIC_SETTINGS_TEST_SCHEMAPRESILIENCYTESTS="all" \
+            -e SPECMATIC_SETTINGS_TEST_SCHEMARESILIENCYTESTS="all" \
             -v "${{ github.workspace }}:/usr/src/app" \
             specmatic/specmatic:latest test \
             --testBaseURL=http://flask-ml-app-service:5000 \
