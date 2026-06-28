@@ -448,7 +448,7 @@ Since the Specmatic version used in this project does not allow to separate HTML
 
 ```docker rm -f flask-ml-app-service```
 
-### Build the latest Flask Application adter pulling latest changes from this repo:
+### Build the latest Flask Application after pulling latest changes from this repo:
 
 ```docker build -t finan-ml-app .```
 
