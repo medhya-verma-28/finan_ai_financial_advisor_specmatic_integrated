@@ -29,7 +29,8 @@ components:
 specmatic:
   settings:
     test:
-      timeoutInMilliseconds: 15000   
+      timeoutInMilliseconds: 15000
+      generativeTests: true
     mock:
       generative: true           
 
