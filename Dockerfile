@@ -23,7 +23,8 @@ ENV FLASK_ENV=testing
 
 # 7. Copy individual files from your root directory
 COPY app.py .
-COPY specmatic.yaml .
+COPY specmatic_contract.yaml .
+COPY specmatic_resiliency.yaml .
 COPY indian_finance_ml_dataset_balanced_final.csv .
 
 # 8. Copy individual application subfolders from your root directory
