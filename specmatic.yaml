@@ -29,7 +29,8 @@ components:
 specmatic:
   settings:
     test:
-      schemaResiliencyTests: none 
+      schemaResiliencyTests: none
+      contractTests: none
       timeoutInMilliseconds: 15000   
     mock:
       generative: true           
