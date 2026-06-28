@@ -35,27 +35,28 @@ jobs:
 
       - name: Run Standard Contract Tests
         run: |
-          docker run --rm --name specmatic-contract-runner \
-          --network financial-test-net \
-          -e REPORT_FOLDER=$env:REPORT_FOLDER \
-          -v "${PWD}:/usr/src/app" \
-          specmatic/specmatic:latest test \
-          --testBaseURL=http://flask-ml-app-service:5000 \
-          --junitReportDir=/usr/src/app/build/reports/specmatic-contract-tests/test/xml \
-          --schemaResiliencyTests=none
+         docker run --rm --name specmatic-contract-runner \
+         --network financial-test-net \
+         -e REPORT_FOLDER=$REPORT_FOLDER \
+         -e SPECMATIC_SCHEMA_RESILIENCY_TESTS=none \
+         -v "${PWD}:/usr/src/app" \
+         specmatic/specmatic:latest test \
+         --testBaseURL=http://flask-ml-app-service:5000 \
+         --junitReportDir=/usr/src/app/build/reports/specmatic-contract-tests/test/xml
+
 
 
       - name: Run Schema Resiliency Tests
         if: always() # Run even if standard contract tests fail
         run: |
-          docker run --rm --name specmatic-resiliency-runner \
-          --network financial-test-net \
-          -e REPORT_FOLDER=$env:REPORT_FOLDER \
-          -v "${PWD}:/usr/src/app" \
-          specmatic/specmatic:latest test \
-          --testBaseURL=http://flask-ml-app-service:5000 \
-          --junitReportDir=/usr/src/app/build/reports/specmatic-resiliency-tests/test/xml \
-          --schemaResiliencyTests=all
+         docker run --rm --name specmatic-resiliency-runner \
+         --network financial-test-net \
+         -e REPORT_FOLDER=$REPORT_FOLDER \
+         -e SPECMATIC_SCHEMA_RESILIENCY_TESTS=all \
+         -v "${PWD}:/usr/src/app" \
+         specmatic/specmatic:latest test \
+         --testBaseURL=http://flask-ml-app-service:5000 \
+         --junitReportDir=/usr/src/app/build/reports/specmatic-resiliency-tests/test/xml
 
 
       - name: Upload Test Report Artifacts
