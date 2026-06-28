@@ -55,8 +55,7 @@ jobs:
           specmatic/specmatic:latest test \
           --testBaseURL=http://flask-ml-app-service:5000 \
           --junitReportDir=/usr/src/app/build/reports/specmatic-resiliency-tests/test/xml \
-          --schemaResiliencyTests=all \
-          --contractTests=none
+          --schemaResiliencyTests=all
 
 
       - name: Upload Test Report Artifacts
