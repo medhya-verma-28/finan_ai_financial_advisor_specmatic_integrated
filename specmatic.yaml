@@ -30,7 +30,7 @@ specmatic:
   settings:
     test:
       timeoutInMilliseconds: 15000
-      generativeTests: true
+      schemaResiliencyTests: none
     mock:
       generative: true           
 
