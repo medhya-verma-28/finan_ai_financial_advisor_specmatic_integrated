@@ -475,8 +475,6 @@ WIP: 0
 
 ### Run Schema Resiliency Tests and Save Report in build/reports/specmatic-resiliency-tests:
 
-```$env:REPORT_FOLDER="build/reports/specmatic-resiliency-tests"```
-
 ```docker run --rm --name specmatic-resiliency-runner --network financial-test-net -v "${PWD}:/usr/src/app" specmatic/specmatic:latest test --config=/usr/src/app/specmatic_resiliency.yaml --testBaseURL=http://flask-ml-app-service:5000 --junitReportDir=/usr/src/app/build/reports/specmatic-resiliency-tests/test/xml```
 
 100% Success is achieved as follows:
