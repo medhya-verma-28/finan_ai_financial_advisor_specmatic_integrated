@@ -37,7 +37,7 @@ jobs:
         run: |
          docker run --rm --name specmatic-contract-runner \
          --network financial-test-net \
-         -e REPORT_FOLDER=$REPORT_FOLDER \
+         -e REPORT_FOLDER=/usr/src/app/build/reports/specmatic-contract-tests \
          -e SPECMATIC_SCHEMA_RESILIENCY_TESTS=none \
          -v "${PWD}:/usr/src/app" \
          specmatic/specmatic:latest test \
@@ -51,7 +51,7 @@ jobs:
         run: |
          docker run --rm --name specmatic-resiliency-runner \
          --network financial-test-net \
-         -e REPORT_FOLDER=$REPORT_FOLDER \
+         -e REPORT_FOLDER=/usr/src/app/build/reports/specmatic-resiliency-tests \
          -e SPECMATIC_SCHEMA_RESILIENCY_TESTS=all \
          -v "${PWD}:/usr/src/app" \
          specmatic/specmatic:latest test \
