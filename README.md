@@ -477,7 +477,7 @@ Skipped: 0
 Error: 0
 WIP: 0
 
-### Run Contract Tests and Save Report in build/reports/specmatic-resiliency-tests:
+### Run Schema Resiliency Tests and Save Report in build/reports/specmatic-resiliency-tests:
 
 ```$env:REPORT_FOLDER="build/reports/specmatic-resiliency-tests"```
 
