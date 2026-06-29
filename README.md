@@ -479,12 +479,14 @@ WIP: 0
 
 100% Success is achieved as follows:
 
-Tests run: 3
-Success: 3
+Tests run: 7
+Success: 7
 Failed: 0
 Skipped: 0
 Error: 0
 WIP: 0
+
+(Out of these 7 tests, there are 3 contract tests and rest 4 are fuzzed resiliency tests)
 
 FINALLY, BOTH CONTRACT AND SCHEMA RESILIENCY TESTS RAN SUCCESSFULLY!
 
