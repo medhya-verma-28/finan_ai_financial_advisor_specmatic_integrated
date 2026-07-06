@@ -83,9 +83,7 @@ paths:
                         example: 100000
                       debt_status:
                         type: string
-                        enum: ["In Debt", "Not in Debt"]
                         example: "In Debt"
-                  
                   predictions:
                     type: object
                     description: Multiclass predictions outputted by SVC models (model, model1, model2).
@@ -95,13 +93,13 @@ paths:
                       - current_expenditure_worth_it
                     properties:
                       financial_state_category:
-                        enum: ["High-Rate Saver (>=25 percent in savings)", "Zero-Balance Living", "Low-Rate Saver (<25 percent in savings)", "Deficit Living"]
+                        type: string
                         example: "High-Rate Saver (>=25 percent in savings)"
                       current_monthly_income_enough:
-                        enum: ["Yes", "No"]
+                        type: string
                         example: "Yes"
                       current_expenditure_worth_it:
-                        enum: ["Yes", "No"]
+                        type: string
                         example: "No"
                   
                   recommendations:
@@ -227,7 +225,6 @@ paths:
                         example: 100000
                       debt_status:
                         type: string
-                        enum: ["In Debt", "Not in Debt"]
                         example: "In Debt"
                   
                   predictions:
@@ -239,13 +236,13 @@ paths:
                       - current_expenditure_worth_it
                     properties:
                       financial_state_category:
-                        enum: ["High-Rate Saver (>=25 percent in savings)", "Zero-Balance Living", "Low-Rate Saver (<25 percent in savings)", "Deficit Living"]
+                        type: string
                         example: "High-Rate Saver (>=25 percent in savings)"
                       current_monthly_income_enough:
-                        enum: ["Yes", "No"]
+                        type: string
                         example: "Yes"
                       current_expenditure_worth_it:
-                        enum: ["Yes", "No"]
+                        type: string
                         example: "No"
                   
                   recommendations:
