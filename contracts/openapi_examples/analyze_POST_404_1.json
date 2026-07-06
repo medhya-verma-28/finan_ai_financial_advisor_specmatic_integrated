@@ -8,17 +8,15 @@
         "body": {
             "query": ""
         },
-        "description": "This is an example of a request to input empty query at the /analyze endpoint "
+        "description": "Request example targeting resources or financial records that do not exist inside data stores."
     },
     "http-response": {
         "status": 404,
-        "body": {
-            "error": "Query not provided. Please provide a financial query."
-        },
-        "status-text": "Not Found",
         "headers": {
             "Content-Type": "application/json"
         },
-        "description": "This is an example of a response after receiving an empty query at the /analyze endpoint "
+        "body": {
+            "error": "$match(dataType: string)"
+        }
     }
 }

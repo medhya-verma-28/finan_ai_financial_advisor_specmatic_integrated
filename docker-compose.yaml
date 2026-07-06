@@ -1,0 +1,69 @@
+networks:
+  financial-test-net:
+    driver: bridge
+
+services:
+  # 1. Your Flask ML Application Service
+  flask-ml-app-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: flask-ml-app-service
+    image: finan-ml-app:latest
+    ports:
+      - "5000:5000"
+    networks:
+      - financial-test-net
+    environment:
+      - LANGEXTRACT_API_KEY=${LANGEXTRACT_API_KEY}
+
+  # 2. Specmatic Contract Testing Runner (ENTERPRISE VERSION)
+  specmatic-contract-runner:
+    image: specmatic/enterprise:latest
+    container_name: specmatic-contract-runner
+    depends_on:
+      - flask-ml-app-service
+    networks:
+      - financial-test-net
+    environment:
+      - SPECMATIC_LICENSE_PATH=/root/.specmatic/specmatic-license.txt
+      - LANGEXTRACT_API_KEY=${LANGEXTRACT_API_KEY}
+    volumes:
+      - .:/usr/src/app
+      - ./specmatic-license.txt:/usr/src/app/specmatic-license.txt:ro
+      - ./specmatic_contract.yaml:/usr/src/app/specmatic.yaml:ro
+    working_dir: /usr/src/app
+    command: >
+      test
+      --config=specmatic.yaml
+      --testBaseURL=http://flask-ml-app-service:5000 
+      --junitReportDir=/usr/src/app/build/reports/specmatic-contract-tests/test/xml
+      --reportFormat=html
+      --reportDir=/usr/src/app/build/reports/specmatic-contract-tests/test/html
+
+  # 3. Specmatic Schema Resiliency Testing Runner (ENTERPRISE VERSION)
+  specmatic-resiliency-runner:
+    image: specmatic/enterprise:latest
+    container_name: specmatic-resiliency-runner
+    depends_on:
+      flask-ml-app-service:
+        condition: service_started
+      specmatic-contract-runner:
+        condition: service_completed_successfully
+    networks:
+      - financial-test-net
+    environment:
+      - SPECMATIC_LICENSE_PATH=/root/.specmatic/specmatic-license.txt
+      - LANGEXTRACT_API_KEY=${LANGEXTRACT_API_KEY}
+    volumes:
+      - .:/usr/src/app
+      - ./specmatic-license.txt:/.specmatic/specmatic-license.txt:ro
+      - ./specmatic_resiliency.yaml:/usr/src/app/specmatic.yaml:ro
+    working_dir: /usr/src/app
+    command: >
+      test 
+      --config=specmatic.yaml
+      --testBaseURL=http://flask-ml-app-service:5000 
+      --junitReportDir=/usr/src/app/build/reports/specmatic-resiliency-tests/test/xml
+      --reportFormat=html
+      --reportDir=/usr/src/app/build/reports/specmatic-resiliency-tests/test/html

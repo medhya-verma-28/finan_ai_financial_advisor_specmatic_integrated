@@ -182,14 +182,124 @@ paths:
                 type: object
                 required:
                   - error
+                  - query
+                  - extracted_features
+                  - predictions
+                  - recommendations
+                  - gemini_report
                 properties:
                   error:
                     type: string
                     example: "Query format not supported. Please provide a financial query in correct format."
+                  query:
+                    type: string
+                    description: Raw textual natural language financial profile from the user.
+                    example: "My monthly in-hand salary is ₹1,40,000. Core cost of living comes out to exactly ₹45,000 every month. I pay a monthly EMI of ₹15,000. Discretionary spending hits around ₹25,000 monthly. I commit a fixed ₹15,000 monthly towards healthcare. Total monthly expenditure has ballooned to ₹1,00,000. I currently have debt."
+                  extracted_features:
+                    type: object
+                    description: Features extracted from the text by langextract and mapped to your CSV structures.
+                    required:
+                      - monthly_income
+                      - cost_of_living
+                      - other_investments
+                      - consumerist_expenditure
+                      - crisis_shock_expenditure
+                      - total_monthly_expenditure
+                      - debt_status
+                    properties:
+                      monthly_income:
+                        type: integer
+                        example: 140000
+                      cost_of_living:
+                        type: integer
+                        example: 45000
+                      other_investments:
+                        type: integer
+                        example: 15000
+                      consumerist_expenditure:
+                        type: integer
+                        example: 25000
+                      crisis_shock_expenditure:
+                        type: integer
+                        example: 15000
+                      total_monthly_expenditure:
+                        type: integer
+                        example: 100000
+                      debt_status:
+                        type: string
+                        enum: ["In Debt", "Not in Debt"]
+                        example: "In Debt"
+                  
+                  predictions:
+                    type: object
+                    description: Multiclass predictions outputted by SVC models (model, model1, model2).
+                    required:
+                      - financial_state_category
+                      - current_monthly_income_enough
+                      - current_expenditure_worth_it
+                    properties:
+                      financial_state_category:
+                        enum: ["High-Rate Saver (>=25% in savings)", "Zero-Balance Living", "Low-Rate Saver (<25% in savings)", "Deficit Living"]
+                        example: "High-Rate Saver (>=25% in savings)"
+                      current_monthly_income_enough:
+                        enum: ["Yes", "No"]
+                        example: "Yes"
+                      current_expenditure_worth_it:
+                        enum: ["Yes", "No"]
+                        example: "No"
+                  
+                  recommendations:
+                    type: object
+                    description: Real value allocations predicted by your Random Forest Regressors (model3, model4, model5, model6).
+                    required:
+                      - suggested_cost_of_living
+                      - suggested_other_investments
+                      - suggested_consumerist_expenditure
+                      - suggested_crisis_shocks
+                    properties:
+                      suggested_cost_of_living:
+                        type: number
+                        format: float
+                        example: 42000.50
+                      suggested_other_investments:
+                        type: number
+                        format: float
+                        example: 20000.00
+                      suggested_consumerist_expenditure:
+                        type: number
+                        format: float
+                        example: 18000.25
+                      suggested_crisis_shocks:
+                        type: number
+                        format: float
+                        example: 15000.00
+
+                  gemini_report:
+                    type: string
+                    description: Generative advisory text summary synthesized by Gemini.
+                    example: "Based on your financial state metrics, your discretionary spending is highly elevated. We suggest reallocating ₹7,000 into investment routes..."
               examples:
                 analyze_POST_400_1:
-                  summary: Example of a failed response with a null query
+                  summary: Example of a successful response with a non-empty query
                   value:
-                    error: "Query format not supported. Please provide a financial query in correct format."
+                    query: "My monthly in-hand salary is ₹1,40,000. Core cost of living comes out to exactly ₹45,000 every month. I pay a monthly EMI of ₹15,000. Discretionary spending hits around ₹25,000 monthly. I commit a fixed ₹15,000 monthly towards healthcare. Total monthly expenditure has ballooned to ₹1,00,000. I currently have debt."
+                    extracted_features:
+                      monthly_income: 140000
+                      cost_of_living: 45000
+                      other_investments: 15000
+                      consumerist_expenditure: 25000
+                      crisis_shock_expenditure: 15000
+                      total_monthly_expenditure: 100000
+                      debt_status: "In Debt"
+                    predictions:
+                      financial_state_category: "High-Rate Saver (>=25% in savings)"
+                      current_monthly_income_enough: "Yes"
+                      current_expenditure_worth_it: "No"
+                    recommendations:
+                      suggested_cost_of_living: 42000.50
+                      suggested_other_investments: 20000.00
+                      suggested_consumerist_expenditure: 18000.25
+                      suggested_crisis_shocks: 15000.00
+                    gemini_report: "Based on your financial state metrics, your discretionary spending is highly elevated. We suggest reallocating ₹7,000 into investment routes..."
 
         

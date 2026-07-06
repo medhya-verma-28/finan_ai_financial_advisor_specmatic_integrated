@@ -442,7 +442,7 @@ On running tests again, 100% success was achieved.
 Junit was used to separate both XML test reports.
 Since the Specmatic version used in this project (Specmatic v2.48.0) does not allow to separate HTML test reports through run commands, we add a report folder directory variable in specmatic.yaml and set its value in run command of each test.
 
-## Final Step-by-step Command Execution to Run Contract and Schema Resiliency Tests (Reports saved separately)
+## Step-by-step Command Execution to Run Contract and Schema Resiliency Tests (Reports saved separately)
 
 ### Forcefully delete any running Docker containers with the same name:
 
@@ -491,6 +491,31 @@ WIP: 0
 FINALLY, BOTH CONTRACT AND SCHEMA RESILIENCY TESTS RAN SUCCESSFULLY!
 
 TEST REPORTS HAVE BEEN SAVED IN SEPARATE DIRECTORIES AS WELL!
+
+## Executing Specmatic Tests Using Docker Compose
+The above commands are now wriiten in docker compose which helps us in executing the specmatic by executing just one command.
+
+## Final Command to Run Specmatic Tests
+
+Command to run tests:
+
+```docker compose up --build```
+
+Command to remove used containers:
+
+```docker compose down```
+
+## RESULTS 
+
+Specmatic Contract Tests
+
+<img width="941" height="67" alt="Image" src="https://github.com/user-attachments/assets/8744d7e3-28fa-4fb6-967c-bf6095064e37" />
+
+Specmatic Schema Resiliency Tests
+
+<img width="808" height="71" alt="Image" src="https://github.com/user-attachments/assets/e9ef5bb7-06a7-44ee-9e04-7456639fc17d" />
+
+
 
 ## Pushing the Changes to GitHub
 

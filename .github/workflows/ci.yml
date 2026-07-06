@@ -11,48 +11,36 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+      # 1. Pull repo code down into the GitHub runner instance
       - name: Checkout Code
         uses: actions/checkout@v4
 
+      # 2. Recreate your Enterprise Specmatic license text safely from GitHub Secrets
+      - name: Create Specmatic License File
+        run: |
+          echo "${{ secrets.SPECMATIC_LICENSE_TEXT }}" > specmatic-license.txt
+
+      # 3. Create structure and loosen write rights for rootless docker volumes
       - name: Create Test Reports Directory Structure
         run: |
           mkdir -p build/reports/specmatic-contract-tests/test/xml
           mkdir -p build/reports/specmatic-resiliency-tests/test/xml
-          # Grant writing permissions to the docker container workspace
           chmod -R 777 build
 
-      - name: Build Application Docker Image
-        run: docker build -t finan-ml-app .
+      # 4. Run the entire Docker Compose stack to completion
+      # Specmatic contract runner runs first, then exits. Then resiliency runner runs and exits.
+      - name: Run Docker Compose
+        env:
+          LANGEXTRACT_API_KEY: ${{ secrets.LANGEXTRACT_API_KEY }}
+        run: docker compose up --build
 
-    # 3. Created an isolated container network bridge inside GitHub runner
-      - name: Create Test Network
-        run: docker network create financial-test-net
+      # 5. Clean up stale testing networks and volumes cleanly
+      # This runs even if tests fail, ensuring reports are flushed to the host runner filesystem
+      - name: Remove Used Containers
+        if: always()
+        run: docker compose down
 
-    # 4. Boot up the Flask application forced into testing environment mode
-      - name: Start Flask App Container
-        run: |
-          docker run -d --name flask-ml-app-service --network financial-test-net -p 5000:5000 finan-ml-app
-
-      - name: Run Standard Contract Tests
-        run: |
-          docker run --rm --name specmatic-contract-runner \
-          --network financial-test-net \
-          -v "${{ github.workspace }}:/usr/src/app" \
-          specmatic/specmatic:latest test --config=/usr/src/app/specmatic_contract.yaml \
-          --testBaseURL=http://flask-ml-app-service:5000 \
-          --junitReportDir=/usr/src/app/build/reports/specmatic-contract-tests/test/xml
-
-      - name: Run Schema Resiliency Tests
-        if: always()  # This ensures resiliency tests run even if standard tests find failures
-        run: |
-          docker run --rm --name specmatic-resiliency-runner \
-          --network financial-test-net \
-          -v "${{ github.workspace }}:/usr/src/app" \
-          specmatic/specmatic:latest test --config=/usr/src/app/specmatic_resiliency.yaml \
-          --testBaseURL=http://flask-ml-app-service:5000 \
-          --junitReportDir=/usr/src/app/build/reports/specmatic-resiliency-tests/test/xml
-
-
+      # 6. Archive and save HTML/XML reports to your GitHub Dashboard
       - name: Upload Test Report Artifacts
         if: always()
         uses: actions/upload-artifact@v4

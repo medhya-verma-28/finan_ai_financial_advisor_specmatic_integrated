@@ -1,19 +1,42 @@
 {
-  "http-request": {
-    "method": "POST",
-    "path": "/analyze",
-    "headers": {
-      "Content-Type": "application/json"
+    "http-request": {
+        "path": "/analyze",
+        "method": "POST",
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "body": {},
+        "description": "Invalid example where request properties are missing entirely to trigger a validation failure block."
     },
-    "body": {}
-  },
-  "http-response": {
-    "status": 400,
-    "headers": {
-      "Content-Type": "application/json"
-    },
-    "body": {
-      "error": "Query not provided. Please provide a financial query."
+    "http-response": {
+        "status": 400,
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "body": {
+            "error": "$match(dataType: string)",
+            "query": "None",
+            "extracted_features": {
+                "monthly_income": 0,
+                "cost_of_living": 0,
+                "other_investments": 0,
+                "consumerist_expenditure": 0,
+                "crisis_shock_expenditure": 0,
+                "total_monthly_expenditure": 0,
+                "debt_status": "Not in Debt"
+            },
+            "predictions": {
+                "financial_state_category": "Deficit Living",
+                "current_monthly_income_enough": "No",
+                "current_expenditure_worth_it": "No"
+            },
+            "recommendations": {
+                "suggested_cost_of_living": 0.0,
+                "suggested_other_investments": 0.0,
+                "suggested_consumerist_expenditure": 0.0,
+                "suggested_crisis_shocks": 0.0
+            },
+            "gemini_report": "Query format not supported. Please provide a financial query in correct format."
+        }
     }
-  }
 }
