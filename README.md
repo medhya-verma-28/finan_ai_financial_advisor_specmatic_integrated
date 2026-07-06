@@ -183,32 +183,32 @@ This repo contains:
 
 Folders / Directories:
 
-```src: The soirce folder of this project, further contains following directories:
+src: The soirce folder of this project, further contains following directories:
   data: ML Dataset
   encoders: Scikit Learn encoders saved       through Joblib
   models: Saved SVC and Random Forest         trained models
   services: Modularised python scripts for    Flask application
   static: app.js and style.css files from     my personal web app repo
-  templates: index.html file from personal    web app repo```
+  templates: index.html file from personal    web app repo
 
-```contracts: contains OPENAPI spec and  external example JSON files```
+contracts: contains OPENAPI spec and  external example JSON files
 
-```build/reports: contains HTML and XML Specmatic Test Reports```
+build/reports: contains HTML and XML Specmatic Test Reports
 
-```.github/workflows: contains CI pipeline yaml file```
+.github/workflows: contains CI pipeline yaml file
 
 Files:
 
-```requirements.txt```
+requirements.txt
 
-```DockerFile```
-```docker-compose.yaml```
+DockerFile
+docker-compose.yaml
 
-```specmatic_contract.yaml ---> Specmatic Contract Tests Configuration File```
-```specmatic_resiliency.yaml ---> Specmatic Resiliency Tests Configuration File```
-```specmatic.yaml ---> Empty yaml file generated due to Docker volume mount of both Specmatic config files```
+specmatic_contract.yaml ---> Specmatic Contract Tests Configuration File
+specmatic_resiliency.yaml ---> Specmatic Resiliency Tests Configuration File
+specmatic.yaml ---> Empty yaml file generated due to Docker volume mount of both Specmatic config files
 
-```temp.py ---> Temporary python script, source for modularised Python Scripts```
+temp.py ---> Temporary python script, source for modularised Python Scripts
 
 --------------------------------------------------------------------
 
