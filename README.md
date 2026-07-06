@@ -142,7 +142,15 @@ Therefore, Specmatic contract testing was incorporated to enforce API correctnes
 
 ## Implementing Specmatic in My ML Financial Advisor Project 
 
-This repository contains a Provider-centric Specmatic Implementation (verifies actual API code's responses). Architechture is as follows:
+This repository contains a Provider-centric Specmatic Implementation (verifies actual API code's responses).
+
+Technical Blog Post on my Journey of Implementing Specmatic in my Project is also available in detail on Hashnode.
+
+Give it a read to fully understand the process:
+
+https://integrating-specmatic-in-financial-advisor-ml-app.hashnode.dev/integrating-specmatic-contract-testing-and-schema-resiliency-testing-in-personal-machine-learning-project-from-local-validation-to-automated-ci
+
+Architechture of Specmatic Implementation is as follows:
 
 ### Architecture of Specmatic Integration
 
@@ -171,8 +179,36 @@ GitHub Actions CI Pipeline
 --------------------------------------------------------------------
 ## What This Repository Contains?
 
+This repo contains:
 
+Folders / Directories:
 
+```src: The soirce folder of this project, further contains following directories:
+  data: ML Dataset
+  encoders: Scikit Learn encoders saved       through Joblib
+  models: Saved SVC and Random Forest         trained models
+  services: Modularised python scripts for    Flask application
+  static: app.js and style.css files from     my personal web app repo
+  templates: index.html file from personal    web app repo```
+
+```contracts: contains OPENAPI spec and  external example JSON files```
+
+```build/reports: contains HTML and XML Specmatic Test Reports```
+
+```.github/workflows: contains CI pipeline yaml file```
+
+Files:
+
+```requirements.txt```
+
+```DockerFile```
+```docker-compose.yaml```
+
+```specmatic_contract.yaml ---> Specmatic Contract Tests Configuration File```
+```specmatic_resiliency.yaml ---> Specmatic Resiliency Tests Configuration File```
+```specmatic.yaml ---> Empty yaml file generated due to Docker volume mount of both Specmatic config files```
+
+```temp.py ---> Temporary python script, source for modularised Python Scripts```
 
 --------------------------------------------------------------------
 
