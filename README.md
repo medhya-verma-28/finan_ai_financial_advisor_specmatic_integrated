@@ -166,17 +166,23 @@ This repo contains:
 Folders / Directories:
 
 src: The soirce folder of this project, further contains following directories:
-  data: ML Dataset
-  encoders: Scikit Learn encoders saved       through Joblib
-  models: Saved SVC and Random Forest         trained models
-  services: Modularised python scripts for    Flask application
-  static: app.js and style.css files from     my personal web app repo
-  templates: index.html file from personal    web app repo
 
+data: ML Dataset
+
+encoders: Scikit Learn encoders saved       through Joblib
+
+models: Saved SVC and Random Forest         trained models
+
+services: Modularised python scripts for    Flask application
+
+static: app.js and style.css files from     my personal web app repo
+
+templates: index.html file from personal    web app repo
+       -------------------------
 contracts: contains OPENAPI spec and  external example JSON files
-
+       -------------------------
 build/reports: contains HTML and XML Specmatic Test Reports
-
+       -------------------------
 .github/workflows: contains CI pipeline yaml file
 
 Files:
@@ -556,11 +562,11 @@ Command to remove used containers:
 
 Specmatic Contract Tests
 
-<img width="941" height="67" alt="Image" src="https://github.com/user-attachments/assets/8744d7e3-28fa-4fb6-967c-bf6095064e37" />
+<img width="808" height="71" alt="Image" src="https://github.com/user-attachments/assets/e9ef5bb7-06a7-44ee-9e04-7456639fc17d" />
 
 Specmatic Schema Resiliency Tests
 
-<img width="808" height="71" alt="Image" src="https://github.com/user-attachments/assets/e9ef5bb7-06a7-44ee-9e04-7456639fc17d" />
+<img width="941" height="67" alt="Image" src="https://github.com/user-attachments/assets/8744d7e3-28fa-4fb6-967c-bf6095064e37" />
 
 
 
