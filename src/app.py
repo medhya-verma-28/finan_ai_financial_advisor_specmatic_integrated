@@ -18,6 +18,40 @@ def index():
         firebase_app_id=os.environ.get('FIREBASE_APP_ID', ''),
     )
 
+# Specmatic Actuator Endpoint Mapping
+@app.route('/actuator/mappings', methods=['GET'])
+def actuator_mappings():
+    contexts = {
+        "application": {
+            "mappings": {
+                "dispatcherServlets": {
+                    "dispatcherServlet": []
+                }
+            }
+        }
+    }
+    
+    # Iterate dynamically through all registered routes in Flask
+    for rule in app.url_map.iter_rules():
+        # Exclude internal flask endpoints and the actuator endpoint itself
+        if rule.endpoint == 'static' or rule.rule.startswith('/actuator'):
+            continue
+            
+        # Format methods array as expected by Specmatic
+        methods = [method for method in rule.methods if method not in ('OPTIONS', 'HEAD')]
+        
+        contexts["application"]["mappings"]["dispatcherServlets"]["dispatcherServlet"].append({
+            "details": {
+                "requestMappingConditions": {
+                    "methods": methods,
+                    "patterns": [rule.rule]
+                }
+            }
+        })
+        
+    return jsonify(contexts)
+
+
 @app.route('/analyze', methods=['POST'])
 def analyze():
     global response_payload

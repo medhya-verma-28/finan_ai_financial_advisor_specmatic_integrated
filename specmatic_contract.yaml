@@ -3,6 +3,8 @@ version: 3
 systemUnderTest:
   service:
     $ref: "#/components/services/flask-ml-app-service"
+    runOptions:
+      $ref: "#/components/runOptions/localFlaskExecution"
 
 components:
   sources:
@@ -18,13 +20,19 @@ components:
             source:
               $ref: "#/components/sources/localFilesystemRepo"
             specs:
-              - "contracts/openapi.yaml"
+              - spec:
+                  id: FinanSpec
+                  path: "contracts/openapi.yaml"
 
   runOptions:
     localFlaskExecution:
       openapi:
         type: "test"
-        baseUrl: "http://flask-ml-app-service:5000"
+        specs:
+          - spec:
+              id: FinanSpec
+              baseUrl: "http://flask-ml-app-service:5000"
+        actuatorUrl: "http://flask-ml-app-service:5000/actuator/mappings"
 
 specmatic:
   settings:

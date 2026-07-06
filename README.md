@@ -140,7 +140,11 @@ Therefore, Specmatic contract testing was incorporated to enforce API correctnes
 
 --------------------------------------------------------------------
 
-## Architecture of Specmatic Integration
+## Implementing Specmatic in My ML Financial Advisor Project 
+
+This repository contains a Provider-centric Specmatic Implementation (verifies actual API code's responses). Architechture is as follows:
+
+### Architecture of Specmatic Integration
 
 API Contract & Examples
 
@@ -163,6 +167,12 @@ OpenAPI Contract Validation
 ↓
 
 GitHub Actions CI Pipeline
+
+--------------------------------------------------------------------
+## What This Repository Contains?
+
+
+
 
 --------------------------------------------------------------------
 
