@@ -106,37 +106,19 @@ Text Response API
 
 - Gemini API
 
-Deployment
+Deployment:
 
 - Render
 
-Contract Testing
+Contract and Schema Resiliency Testing
 
-- Specmatic Studio
+- Specmatic
 
 - OpenAPI Specification
 
 CI/CD
 
-- GitHub Actions
-
---------------------------------------------------------------------
-
-## Why Contract Testing Was Added
-
-Although the application was functioning correctly, API contracts had not yet been formally validated.
-
-Potential issues included:
-
-- Incorrect HTTP status codes.
-
-- Unexpected response structures.
-
-- Value mismatches.
-
-- Breaking changes after future modifications.
-
-Therefore, Specmatic contract testing was incorporated to enforce API correctness.
+- GitHub Actions 
 
 --------------------------------------------------------------------
 
@@ -210,6 +192,23 @@ specmatic.yaml ---> Empty yaml file generated due to Docker volume mount of both
 
 temp.py ---> Temporary python script, source for modularised Python Scripts
 
+--------------------------------------------------------------------
+
+## Why Contract Testing Was Added
+
+Although the application was functioning correctly, API contracts had not yet been formally validated.
+
+Potential issues included:
+
+- Incorrect HTTP status codes.
+
+- Unexpected response structures.
+
+- Value mismatches.
+
+- Breaking changes after future modifications.
+
+Therefore, Specmatic contract testing was incorporated to enforce API correctness.
 --------------------------------------------------------------------
 
 ## Specmatic Contract Testing Implementation:
