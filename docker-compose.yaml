@@ -30,7 +30,7 @@ services:
       - LANGEXTRACT_API_KEY=${LANGEXTRACT_API_KEY}
     volumes:
       - .:/usr/src/app
-      - ./specmatic-license.txt:/usr/src/app/specmatic-license.txt:ro
+      - ./specmatic-license.txt:/root/.specmatic/specmatic-license.txt:ro
       - ./specmatic_contract.yaml:/usr/src/app/specmatic.yaml:ro
     working_dir: /usr/src/app
     command: >

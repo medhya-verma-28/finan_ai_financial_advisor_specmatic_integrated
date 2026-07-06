@@ -1,4 +1,4 @@
-<testsuite errors="0" failures="0" hostname="8b437f8507c6" name="Contract Tests" skipped="0" tests="7" time="3.603" timestamp="2026-07-06T07:57:10">
+<testsuite errors="0" failures="0" hostname="3d8ffcd7f92a" name="Contract Tests" skipped="0" tests="7" time="3.513" timestamp="2026-07-06T08:12:22">
 <properties>
 <property name="CONFIG_FILE_PATH" value="specmatic.yaml"/>
 <property name="file.encoding" value="ANSI_X3.4-1968"/>
@@ -52,7 +52,7 @@
 <property name="user.name" value="root"/>
 <property name="user.timezone" value="GMT"/>
 </properties>
-<testcase classname="io.specmatic.test.SpecmaticJUnitSupport" name="Contract Tests &gt; SpecmaticJUnitSupport &gt; contractTest() &gt; -ve  Scenario: POST /analyze -&gt; 4xx with the request from the example 'analyze_POST_200_1' where REQUEST.BODY contains all the keys AND the key query is mutated from string to null" time="0.019">
+<testcase classname="io.specmatic.test.SpecmaticJUnitSupport" name="Contract Tests &gt; SpecmaticJUnitSupport &gt; contractTest() &gt; -ve  Scenario: POST /analyze -&gt; 4xx with the request from the example 'analyze_POST_200_1' where REQUEST.BODY contains all the keys AND the key query is mutated from string to null" time="0.022">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:io.specmatic.test.SpecmaticJUnitSupport]/[test-factory:contractTest()]/[dynamic-test:#5]
 display-name: Contract Tests > SpecmaticJUnitSupport > contractTest() > -ve  Scenario: POST /analyze -> 4xx with the request from the example 'analyze_POST_200_1' where REQUEST.BODY contains all the keys AND the key query is mutated from string to null
@@ -64,31 +64,31 @@ unique-id: [engine:junit-jupiter]/[class:io.specmatic.test.SpecmaticJUnitSupport
 display-name: Contract Tests > SpecmaticJUnitSupport > contractTest() > -ve  Scenario: POST /analyze -> 4xx with the request from the example 'analyze_POST_200_1' where REQUEST.BODY contains all the keys AND the key query is mutated from string to number
 ]]></system-out>
 </testcase>
-<testcase classname="io.specmatic.test.SpecmaticJUnitSupport" name="Contract Tests &gt; SpecmaticJUnitSupport &gt; contractTest() &gt; -ve  Scenario: POST /analyze -&gt; 4xx with the request from the example 'analyze_POST_200_1' where REQUEST.BODY contains all the keys AND the key query is mutated from string to boolean" time="0.02">
+<testcase classname="io.specmatic.test.SpecmaticJUnitSupport" name="Contract Tests &gt; SpecmaticJUnitSupport &gt; contractTest() &gt; -ve  Scenario: POST /analyze -&gt; 4xx with the request from the example 'analyze_POST_200_1' where REQUEST.BODY contains all the keys AND the key query is mutated from string to boolean" time="0.023">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:io.specmatic.test.SpecmaticJUnitSupport]/[test-factory:contractTest()]/[dynamic-test:#7]
 display-name: Contract Tests > SpecmaticJUnitSupport > contractTest() > -ve  Scenario: POST /analyze -> 4xx with the request from the example 'analyze_POST_200_1' where REQUEST.BODY contains all the keys AND the key query is mutated from string to boolean
 ]]></system-out>
 </testcase>
-<testcase classname="io.specmatic.test.SpecmaticJUnitSupport" name="Contract Tests &gt; SpecmaticJUnitSupport &gt; contractTest() &gt; +ve  Scenario: POST /analyze -&gt; 200 with the request from the example 'analyze_POST_200_1' where REQUEST.BODY contains all the keys" time="0.271">
+<testcase classname="io.specmatic.test.SpecmaticJUnitSupport" name="Contract Tests &gt; SpecmaticJUnitSupport &gt; contractTest() &gt; +ve  Scenario: POST /analyze -&gt; 200 with the request from the example 'analyze_POST_200_1' where REQUEST.BODY contains all the keys" time="0.237">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:io.specmatic.test.SpecmaticJUnitSupport]/[test-factory:contractTest()]/[dynamic-test:#1]
 display-name: Contract Tests > SpecmaticJUnitSupport > contractTest() > +ve  Scenario: POST /analyze -> 200 with the request from the example 'analyze_POST_200_1' where REQUEST.BODY contains all the keys
 ]]></system-out>
 </testcase>
-<testcase classname="io.specmatic.test.SpecmaticJUnitSupport" name="Contract Tests &gt; SpecmaticJUnitSupport &gt; contractTest() &gt; +ve  Scenario: POST /analyze -&gt; 404 with the request from the example 'analyze_POST_404_1'" time="0.021">
+<testcase classname="io.specmatic.test.SpecmaticJUnitSupport" name="Contract Tests &gt; SpecmaticJUnitSupport &gt; contractTest() &gt; +ve  Scenario: POST /analyze -&gt; 404 with the request from the example 'analyze_POST_404_1'" time="0.016">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:io.specmatic.test.SpecmaticJUnitSupport]/[test-factory:contractTest()]/[dynamic-test:#2]
 display-name: Contract Tests > SpecmaticJUnitSupport > contractTest() > +ve  Scenario: POST /analyze -> 404 with the request from the example 'analyze_POST_404_1'
 ]]></system-out>
 </testcase>
-<testcase classname="io.specmatic.test.SpecmaticJUnitSupport" name="Contract Tests &gt; SpecmaticJUnitSupport &gt; contractTest() &gt; +ve  Scenario: POST /analyze -&gt; 400 with the request from the example 'analyze_POST_400_1'" time="0.024">
+<testcase classname="io.specmatic.test.SpecmaticJUnitSupport" name="Contract Tests &gt; SpecmaticJUnitSupport &gt; contractTest() &gt; +ve  Scenario: POST /analyze -&gt; 400 with the request from the example 'analyze_POST_400_1'" time="0.023">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:io.specmatic.test.SpecmaticJUnitSupport]/[test-factory:contractTest()]/[dynamic-test:#3]
 display-name: Contract Tests > SpecmaticJUnitSupport > contractTest() > +ve  Scenario: POST /analyze -> 400 with the request from the example 'analyze_POST_400_1'
 ]]></system-out>
 </testcase>
-<testcase classname="io.specmatic.test.SpecmaticJUnitSupport" name="Contract Tests &gt; SpecmaticJUnitSupport &gt; contractTest() &gt; -ve  Scenario: POST /analyze -&gt; 4xx with the request from the example 'analyze_POST_200_1' where REQUEST.BODY has been omitted" time="0.023">
+<testcase classname="io.specmatic.test.SpecmaticJUnitSupport" name="Contract Tests &gt; SpecmaticJUnitSupport &gt; contractTest() &gt; -ve  Scenario: POST /analyze -&gt; 4xx with the request from the example 'analyze_POST_200_1' where REQUEST.BODY has been omitted" time="0.025">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:io.specmatic.test.SpecmaticJUnitSupport]/[test-factory:contractTest()]/[dynamic-test:#4]
 display-name: Contract Tests > SpecmaticJUnitSupport > contractTest() > -ve  Scenario: POST /analyze -> 4xx with the request from the example 'analyze_POST_200_1' where REQUEST.BODY has been omitted

@@ -29,10 +29,15 @@ jobs:
 
       # 4. Run the entire Docker Compose stack to completion
       # Specmatic contract runner runs first, then exits. Then resiliency runner runs and exits.
-      - name: Run Docker Compose
+      - name: Run Docker Compose Tests
         env:
           LANGEXTRACT_API_KEY: ${{ secrets.LANGEXTRACT_API_KEY }}
-        run: docker compose up --build
+        run: |
+          docker compose up --build \
+          --abort-on-container-exit \
+          --attach specmatic-contract-runner \
+          --attach specmatic-resiliency-runner
+
 
       # 5. Clean up stale testing networks and volumes cleanly
       # This runs even if tests fail, ensuring reports are flushed to the host runner filesystem
