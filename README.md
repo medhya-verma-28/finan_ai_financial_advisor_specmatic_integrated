@@ -187,7 +187,9 @@ DockerFile
 docker-compose.yaml
 
 specmatic_contract.yaml ---> Specmatic Contract Tests Configuration File
+
 specmatic_resiliency.yaml ---> Specmatic Resiliency Tests Configuration File
+
 specmatic.yaml ---> Empty yaml file generated due to Docker volume mount of both Specmatic config files
 
 temp.py ---> Temporary python script, source for modularised Python Scripts
