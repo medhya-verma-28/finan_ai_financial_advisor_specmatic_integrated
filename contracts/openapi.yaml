@@ -95,8 +95,8 @@ paths:
                       - current_expenditure_worth_it
                     properties:
                       financial_state_category:
-                        enum: ["High-Rate Saver (>=25% in savings)", "Zero-Balance Living", "Low-Rate Saver (<25% in savings)", "Deficit Living"]
-                        example: "High-Rate Saver (>=25% in savings)"
+                        enum: ["High-Rate Saver (>=25 percent in savings)", "Zero-Balance Living", "Low-Rate Saver (<25 percent in savings)", "Deficit Living"]
+                        example: "High-Rate Saver (>=25 percent in savings)"
                       current_monthly_income_enough:
                         enum: ["Yes", "No"]
                         example: "Yes"
@@ -148,7 +148,7 @@ paths:
                       total_monthly_expenditure: 100000
                       debt_status: "In Debt"
                     predictions:
-                      financial_state_category: "High-Rate Saver (>=25% in savings)"
+                      financial_state_category: "High-Rate Saver (>=25 percent in savings)"
                       current_monthly_income_enough: "Yes"
                       current_expenditure_worth_it: "No"
                     recommendations:
@@ -239,8 +239,8 @@ paths:
                       - current_expenditure_worth_it
                     properties:
                       financial_state_category:
-                        enum: ["High-Rate Saver (>=25% in savings)", "Zero-Balance Living", "Low-Rate Saver (<25% in savings)", "Deficit Living"]
-                        example: "High-Rate Saver (>=25% in savings)"
+                        enum: ["High-Rate Saver (>=25 percent in savings)", "Zero-Balance Living", "Low-Rate Saver (<25 percent in savings)", "Deficit Living"]
+                        example: "High-Rate Saver (>=25 percent in savings)"
                       current_monthly_income_enough:
                         enum: ["Yes", "No"]
                         example: "Yes"
@@ -292,7 +292,7 @@ paths:
                       total_monthly_expenditure: 100000
                       debt_status: "In Debt"
                     predictions:
-                      financial_state_category: "High-Rate Saver (>=25% in savings)"
+                      financial_state_category: "High-Rate Saver (>=25 percent in savings)"
                       current_monthly_income_enough: "Yes"
                       current_expenditure_worth_it: "No"
                     recommendations:

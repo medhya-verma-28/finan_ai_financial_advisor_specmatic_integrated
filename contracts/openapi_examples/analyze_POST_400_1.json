@@ -15,28 +15,28 @@
         },
         "body": {
             "error": "$match(dataType: string)",
-            "query": "None",
+            "query": "$match(dataType: string)",
             "extracted_features": {
-                "monthly_income": 0,
-                "cost_of_living": 0,
-                "other_investments": 0,
-                "consumerist_expenditure": 0,
-                "crisis_shock_expenditure": 0,
-                "total_monthly_expenditure": 0,
-                "debt_status": "Not in Debt"
+                "monthly_income": "$match(dataType: integer)",
+                "cost_of_living": "$match(dataType: integer)",
+                "other_investments": "$match(dataType: integer)",
+                "consumerist_expenditure": "$match(dataType: integer)",
+                "crisis_shock_expenditure": "$match(dataType: integer)",
+                "total_monthly_expenditure": "$match(dataType: integer)",
+                "debt_status": "$match(dataType: string)"
             },
             "predictions": {
-                "financial_state_category": "Deficit Living",
-                "current_monthly_income_enough": "No",
-                "current_expenditure_worth_it": "No"
+                "financial_state_category": "$match(dataType: string)",
+                "current_monthly_income_enough": "$match(dataType: string)",
+                "current_expenditure_worth_it": "$match(dataType: string)"
             },
             "recommendations": {
-                "suggested_cost_of_living": 0.0,
-                "suggested_other_investments": 0.0,
-                "suggested_consumerist_expenditure": 0.0,
-                "suggested_crisis_shocks": 0.0
+                "suggested_cost_of_living": "$match(dataType: number)",
+                "suggested_other_investments": "$match(dataType: number)",
+                "suggested_consumerist_expenditure": "$match(dataType: number)",
+                "suggested_crisis_shocks": "$match(dataType: number)"
             },
-            "gemini_report": "Query format not supported. Please provide a financial query in correct format."
+            "gemini_report": "$match(dataType: string)"
         }
     }
 }

@@ -1,4 +1,4 @@
-<testsuite errors="0" failures="0" hostname="dd8f08475369" name="Contract Tests" skipped="0" tests="3" time="3.401" timestamp="2026-07-06T08:12:14">
+<testsuite errors="0" failures="0" hostname="7c456abed752" name="Contract Tests" skipped="0" tests="3" time="3.425" timestamp="2026-07-06T08:28:45">
 <properties>
 <property name="CONFIG_FILE_PATH" value="specmatic.yaml"/>
 <property name="file.encoding" value="ANSI_X3.4-1968"/>
@@ -52,19 +52,19 @@
 <property name="user.name" value="root"/>
 <property name="user.timezone" value="GMT"/>
 </properties>
-<testcase classname="io.specmatic.test.SpecmaticJUnitSupport" name="Contract Tests &gt; SpecmaticJUnitSupport &gt; contractTest() &gt; Scenario: POST /analyze -&gt; 200 with the request from the example 'analyze_POST_200_1'" time="0.212">
+<testcase classname="io.specmatic.test.SpecmaticJUnitSupport" name="Contract Tests &gt; SpecmaticJUnitSupport &gt; contractTest() &gt; Scenario: POST /analyze -&gt; 200 with the request from the example 'analyze_POST_200_1'" time="0.222">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:io.specmatic.test.SpecmaticJUnitSupport]/[test-factory:contractTest()]/[dynamic-test:#1]
 display-name: Contract Tests > SpecmaticJUnitSupport > contractTest() > Scenario: POST /analyze -> 200 with the request from the example 'analyze_POST_200_1'
 ]]></system-out>
 </testcase>
-<testcase classname="io.specmatic.test.SpecmaticJUnitSupport" name="Contract Tests &gt; SpecmaticJUnitSupport &gt; contractTest() &gt; Scenario: POST /analyze -&gt; 404 with the request from the example 'analyze_POST_404_1'" time="0.016">
+<testcase classname="io.specmatic.test.SpecmaticJUnitSupport" name="Contract Tests &gt; SpecmaticJUnitSupport &gt; contractTest() &gt; Scenario: POST /analyze -&gt; 404 with the request from the example 'analyze_POST_404_1'" time="0.02">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:io.specmatic.test.SpecmaticJUnitSupport]/[test-factory:contractTest()]/[dynamic-test:#2]
 display-name: Contract Tests > SpecmaticJUnitSupport > contractTest() > Scenario: POST /analyze -> 404 with the request from the example 'analyze_POST_404_1'
 ]]></system-out>
 </testcase>
-<testcase classname="io.specmatic.test.SpecmaticJUnitSupport" name="Contract Tests &gt; SpecmaticJUnitSupport &gt; contractTest() &gt; Scenario: POST /analyze -&gt; 400 with the request from the example 'analyze_POST_400_1'" time="0.023">
+<testcase classname="io.specmatic.test.SpecmaticJUnitSupport" name="Contract Tests &gt; SpecmaticJUnitSupport &gt; contractTest() &gt; Scenario: POST /analyze -&gt; 400 with the request from the example 'analyze_POST_400_1'" time="0.027">
 <system-out><![CDATA[
 unique-id: [engine:junit-jupiter]/[class:io.specmatic.test.SpecmaticJUnitSupport]/[test-factory:contractTest()]/[dynamic-test:#3]
 display-name: Contract Tests > SpecmaticJUnitSupport > contractTest() > Scenario: POST /analyze -> 400 with the request from the example 'analyze_POST_400_1'
