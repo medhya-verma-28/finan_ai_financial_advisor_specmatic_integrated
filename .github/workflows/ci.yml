@@ -30,6 +30,7 @@ jobs:
       # 4b. Run the Specmatic Contract Runner and exit
       - name: Run Specmatic Contract Tests
         run: |
+          docker compose up -d finan-ml-app \
           docker compose up --build --abort-on-container-exit --exit-code-from specmatic-contract-runner specmatic-contract-runner
         
       # 4c. Run the Resiliency Tests and exit
