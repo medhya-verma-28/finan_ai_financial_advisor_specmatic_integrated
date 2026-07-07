@@ -33,8 +33,7 @@ jobs:
         env:
           LANGEXTRACT_API_KEY: ${{ secrets.LANGEXTRACT_API_KEY }}
         run: |
-          docker compose up --build --attach flask-ml-app-service --attach specmatic-contract-runner \
-          --attach specmatic-resiliency-runner
+          docker compose up --build --exit-code-from specmatic-resiliency-runner
 
 
       # 5. Clean up stale testing networks and volumes cleanly
