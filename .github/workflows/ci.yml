@@ -30,12 +30,12 @@ jobs:
       # 4a. Run the Specmatic Contract Runner and exit
       - name: Run Specmatic Contract Tests
         run: |
-          docker compose up --build --abort-on-container-exit --exit-code-from specmatic-contract-runner specmatic-contract-runner
+          docker compose up --abort-on-container-exit --exit-code-from specmatic-contract-runner specmatic-contract-runner
         
       # 4b. Run the Resiliency Tests and exit
       - name: Run Specmatic Resiliency Tests
         run: |
-          docker compose up --build --abort-on-container-exit --exit-code-from specmatic-resiliency-runner specmatic-resiliency-runner
+          docker compose up --abort-on-container-exit --exit-code-from specmatic-resiliency-runner specmatic-resiliency-runner
 
       # 4c. Clean up stopped containers
       - name: Remove Used Containers
