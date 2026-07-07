@@ -30,7 +30,7 @@ jobs:
       # 4. Run the Specmatic Contract and Resiliency Tests
       - name: Run the Specmatic Contract and Resiliency Tests
         run: |
-          docker compose up -d --build
+          docker compose up -d
 
       # 5. Clean up stopped containers
       - name: Remove Used Containers
