@@ -27,22 +27,17 @@ jobs:
           mkdir -p build/reports/specmatic-resiliency-tests/test/xml
           chmod -R 777 build
 
-      # 4. Run the entire Docker Compose stack to completion
-      # Specmatic contract runner runs first, then exits. Then resiliency runner runs and exits.
+      # 4. Run the entire Docker Compose stack to completion and remove used containers
+      # Specmatic contract runner runs first, then exits. Then resiliency runner runs and exits. Then containers are removed
       - name: Run Docker Compose Tests
         env:
           LANGEXTRACT_API_KEY: ${{ secrets.LANGEXTRACT_API_KEY }}
         run: |
-          docker compose up --build --attach flask-ml-app-service
+          docker compose up -d --build --attach flask-ml-app-service --attach specmatic-contract-runner \
+          --attach specmatic-resiliency-runner
+          docker compose down
 
-
-      # 5. Clean up stale testing networks and volumes cleanly
-      # This runs even if tests fail, ensuring reports are flushed to the host runner filesystem
-      - name: Remove Used Containers
-        if: always()
-        run: docker compose down
-
-      # 6. Archive and save HTML/XML reports to your GitHub Dashboard
+      # 5. Archive and save HTML/XML reports to your GitHub Dashboard
       - name: Upload Test Report Artifacts
         if: always()
         uses: actions/upload-artifact@v4
