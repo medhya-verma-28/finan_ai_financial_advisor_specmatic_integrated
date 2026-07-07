@@ -27,20 +27,15 @@ jobs:
           mkdir -p build/reports/specmatic-resiliency-tests/test/xml
           chmod -R 777 build
           
-      # 4a. Run the Flask App Container
-      - name: Run the Flask App Container
-        run: |
-          docker compose up --abort-on-container-exit flask-ml-app-service
-          
       # 4b. Run the Specmatic Contract Runner and exit
       - name: Run Specmatic Contract Tests
         run: |
-          docker compose up --abort-on-container-exit specmatic-contract-runner
+          docker compose up --abort-on-container-exit --exit-code-from specmatic-contract-runner specmatic-contract-runner
         
       # 4c. Run the Resiliency Tests and exit
       - name: Run Specmatic Resiliency Tests
         run: |
-          docker compose up --abort-on-container-exit specmatic-resiliency-runner
+          docker compose up --abort-on-container-exit --exit-code-from specmatic-resiliency-runner specmatic-resiliency-runner
 
       # 4d. Clean up stopped containers
       - name: Remove Used Containers
