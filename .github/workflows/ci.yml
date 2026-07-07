@@ -34,6 +34,11 @@ jobs:
           LANGEXTRACT_API_KEY: ${{ secrets.LANGEXTRACT_API_KEY }}
         run: |
           docker compose up -d --build
+
+      - name: Remove Used Containers
+        env:
+          LANGEXTRACT_API_KEY: ${{ secrets.LANGEXTRACT_API_KEY }}
+        run: |
           docker compose down
 
       # 5. Archive and save HTML/XML reports to your GitHub Dashboard
