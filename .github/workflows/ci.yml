@@ -33,8 +33,7 @@ jobs:
         env:
           LANGEXTRACT_API_KEY: ${{ secrets.LANGEXTRACT_API_KEY }}
         run: |
-          docker compose up -d --build --attach flask-ml-app-service --attach specmatic-contract-runner \
-          --attach specmatic-resiliency-runner
+          docker compose up -d --build
           docker compose down
 
       # 5. Archive and save HTML/XML reports to your GitHub Dashboard
