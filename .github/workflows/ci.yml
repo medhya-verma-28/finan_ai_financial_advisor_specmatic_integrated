@@ -28,14 +28,9 @@ jobs:
           chmod -R 777 build
           
       # 4a. Run the Specmatic Contract and Resiliency Tests
-      - name: Run Specmatic Contract Tests
+      - name: Run the Specmatic Contract and Resiliency Tests
         run: |
-          docker compose up --build
-    
-      # 4c. Clean up stopped containers
-      - name: Remove Used Containers
-        if: always()
-        run: |
+          docker compose up --build \
           docker compose down
 
       # 5. Archive and save HTML/XML reports to your GitHub Dashboard
