@@ -27,10 +27,10 @@ jobs:
           mkdir -p build/reports/specmatic-resiliency-tests/test/xml
           chmod -R 777 build
       
-      # 4a. Build app
-      - name: Build app
+      # 4a. Run app service
+      - name: Run app service
         run: |
-          docker compose up -d finan-ml-app
+          docker compose up -d finan-ml-app-service
           
       # 4b. Run the Specmatic Contract Runner and exit
       - name: Run Specmatic Contract Tests
