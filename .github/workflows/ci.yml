@@ -32,11 +32,20 @@ jobs:
         run: |
           docker compose up --build
 
-      # 5. Clean up stopped containers
-      - name: Remove Used Containers
-        if: always()
+      - name: Run Tests
         run: |
-          docker compose down
+          docker compose exec specmatic-contract-runner 
+          docker compose exec specmatic-resiliency-runner
+
+    # 5. ALWAYS dump logs if any previous step fails
+      - name: Print Container Logs on Failure
+        if: failure()
+        run: docker compose logs --tail 200
+
+    # 6. Clean up networks, volumes, and containers
+      - name: Teardown environment
+        if: always()
+        run: docker compose down -v
           
 
       # . Archive and save HTML/XML reports to your GitHub Dashboard
