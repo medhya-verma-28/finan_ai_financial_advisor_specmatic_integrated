@@ -27,22 +27,16 @@ jobs:
           mkdir -p build/reports/specmatic-resiliency-tests/test/xml
           chmod -R 777 build
           
-      # 4a. Run the Specmatic Contract Runner and exit
+      # 4a. Run the Specmatic Contract and Resiliency Tests
       - name: Run Specmatic Contract Tests
         run: |
-          docker compose up --abort-on-container-exit --exit-code-from specmatic-contract-runner specmatic-contract-runner
-        
-      # 4b. Run the Resiliency Tests and exit
-      - name: Run Specmatic Resiliency Tests
-        run: |
-          docker compose up --abort-on-container-exit --exit-code-from specmatic-resiliency-runner specmatic-resiliency-runner
-
+          docker compose up --build
+    
       # 4c. Clean up stopped containers
       - name: Remove Used Containers
         if: always()
         run: |
           docker compose down
-
 
       # 5. Archive and save HTML/XML reports to your GitHub Dashboard
       - name: Upload Test Report Artifacts
