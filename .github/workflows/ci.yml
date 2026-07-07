@@ -27,19 +27,22 @@ jobs:
           mkdir -p build/reports/specmatic-resiliency-tests/test/xml
           chmod -R 777 build
 
-      # 4. Run the entire Docker Compose stack to completion and remove used containers
-      # Specmatic contract runner runs first, then exits. Then resiliency runner runs and exits. Then containers are removed
-      - name: Run Docker Compose Tests
-        env:
-          LANGEXTRACT_API_KEY: ${{ secrets.LANGEXTRACT_API_KEY }}
+      # 4a. Run the Specmatic Contract Runner and exit
+      - name: Run Specmatic Contract Tests
         run: |
-          docker compose up -d --build
+          docker compose up --build --abort-on-container-exit specmatic-contract-runner
+        
+      # 4b. Run the Resiliency Tests and exit
+      - name: Run Specmatic Resiliency Tests
+        run: |
+          docker compose up --abort-on-container-exit specmatic-resiliency-runner
 
+      # 4c. Clean up stopped containers
       - name: Remove Used Containers
-        env:
-          LANGEXTRACT_API_KEY: ${{ secrets.LANGEXTRACT_API_KEY }}
+        if: always()
         run: |
           docker compose down
+
 
       # 5. Archive and save HTML/XML reports to your GitHub Dashboard
       - name: Upload Test Report Artifacts
