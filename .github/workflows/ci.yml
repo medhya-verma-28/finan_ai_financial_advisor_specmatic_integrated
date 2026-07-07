@@ -30,7 +30,7 @@ jobs:
       # 4. Run the Specmatic Contract and Resiliency Tests
       - name: Run the Specmatic Contract and Resiliency Tests
         run: |
-          docker compose up --build
+          docker compose up -d --build
 
       - name: Run Tests
         run: |
