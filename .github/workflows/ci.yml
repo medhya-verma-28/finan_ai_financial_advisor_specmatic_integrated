@@ -26,11 +26,15 @@ jobs:
           mkdir -p build/reports/specmatic-contract-tests/test/xml
           mkdir -p build/reports/specmatic-resiliency-tests/test/xml
           chmod -R 777 build
+      
+      # 4a. Build app
+      - name: Build app
+        run: |
+          docker compose up -d finan-ml-app
           
       # 4b. Run the Specmatic Contract Runner and exit
       - name: Run Specmatic Contract Tests
         run: |
-          docker compose up -d finan-ml-app \
           docker compose up --build --abort-on-container-exit --exit-code-from specmatic-contract-runner specmatic-contract-runner
         
       # 4c. Run the Resiliency Tests and exit
