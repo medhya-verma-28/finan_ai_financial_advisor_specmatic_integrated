@@ -55,15 +55,17 @@ jobs:
         echo "=== Resiliency Test Logs ==="
         docker compose logs specmatic-resiliency-runner || true
 
-    # 6. Tear down the environment completely, wiping any volumes generated during testing
-    - name: Teardown environment
-      if: always()
-      run: docker compose down -v
-
-      # 7. Archive and save HTML/XML reports to your GitHub Dashboard
+      # 6. Archive and save HTML/XML reports to your GitHub Dashboard
     - name: Upload Test Report Artifacts
       if: always()
       uses: actions/upload-artifact@v4
       with:
        name: specmatic-test-reports
-       path: build/reports/
+       path: build/reports/  
+
+    # 7. Tear down the environment completely, wiping any volumes generated during testing
+    - name: Teardown environment
+      if: always()
+      run: docker compose down -v
+
+      
