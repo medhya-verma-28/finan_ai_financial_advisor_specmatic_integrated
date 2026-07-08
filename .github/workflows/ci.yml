@@ -1,57 +1,82 @@
-name: Specmatic Contract and Resiliency Tests
+name: Specmatic Contract & Resiliency Testing CI
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
   pull_request:
-    branches: [main]
+    branches: [ main ]
 
 jobs:
   specmatic-tests:
     runs-on: ubuntu-latest
-    
+
     steps:
-      # 1. Pull repo code down into the GitHub runner instance
-      - name: Checkout Code
-        uses: actions/checkout@v4
+    # 1. Fetch the code from the repository
+    - name: Checkout code
+      uses: actions/checkout@v4
 
-      # 2. Recreate your Enterprise Specmatic license text safely from GitHub Secrets
-      - name: Create Specmatic License File
-        run: |
-          echo "${{ secrets.SPECMATIC_LICENSE_TEXT }}" > specmatic-license.txt
+    # 2. Build the application and run all Specmatic test runners via Compose in detached mode.
+    # The --build flag ensures the latest Flask Dockerfile updates are pulled in.
+    - name: Run Specmatic Test Stack
+      run: docker compose up --build -d
 
-      # 3. Create structure and loosen write rights for rootless docker volumes
-      - name: Create Test Reports Directory Structure
-        run: |
-          mkdir -p build/reports/specmatic-contract-tests/test/xml
-          mkdir -p build/reports/specmatic-resiliency-tests/test/xml
-          chmod -R 777 build
-          
-      # 4. Run the Specmatic Contract and Resiliency Tests
-      - name: Run the Specmatic Contract and Resiliency Tests
-        run: |
-          docker compose up -d --build
+    # 3. Block and wait for the Specmatic test runner containers to finish execution
+    - name: Wait for Test Completion
+      run: |
+        echo "Monitoring Specmatic test execution..."
+        # Wait for the contract runner and resiliency runner containers to finish executing tests
+        docker wait finan_ai_financial_advisor_specmatic_integrated-specmatic-contract-runner-1 || true
+        docker wait finan_ai_financial_advisor_specmatic_integrated-specmatic-resiliency-runner-1 || true
 
-      - name: Run Tests
-        run: |
+    # 4. Inspect the test exit codes to determine if the CI pass/fails
+    - name: Check Test Results
+      run: |
+        # Inspect exit codes of the runner services to verify 100% success metrics
+        CONTRACT_EXIT=$(docker inspect finan_ai_financial_advisor_specmatic_integrated-specmatic-contract-runner-1 --format='{{.State.ExitCode}}')
+        RESILIENCY_EXIT=$(docker inspect finan_ai_financial_advisor_specmatic_integrated-specmatic-resiliency-runner-1 --format='{{.State.ExitCode}}')
+        
+        echo "Contract Test Runner Exit Code: $CONTRACT_EXIT"
+        echo "Resiliency Test Runner Exit Code: $RESILIENCY_EXIT"
+        
+        if [ "$CONTRACT_EXIT" -ne 0 ] || [ "$RESILIENCY_EXIT" -ne 0 ]; then
+          echo "Specmatic tests failed!"
+          exit 1
+        fi
+        echo "All Specmatic contract and resiliency tests passed successfully!"
+
+    # 5. Dump real-time container logs only if a failure occurs anywhere in the pipeline
+    - name: Print Container Logs on Failure
+      if: failure()
+      run: |
+        echo "=== Flask Application Logs ==="
+        docker compose logs flask-ml-app-service || true
+        echo "=== Contract Test Logs ==="
+        docker compose logs specmatic-contract-runner || true
+        echo "=== Resiliency Test Logs ==="
+        docker compose logs specmatic-resiliency-runner || true
+
+    # 6. Tear down the environment completely, wiping any volumes generated during testing
+    - name: Teardown environment
+      if: always()
+      run: docker compose down -v
           docker compose exec specmatic-contract-runner 
           docker compose exec specmatic-resiliency-runner
 
     # 5. ALWAYS dump logs if any previous step fails
-      - name: Print Container Logs on Failure
-        if: failure()
-        run: docker compose logs --tail 200
+    - name: Print Container Logs on Failure
+      if: failure()
+      run: docker compose logs --tail 200
 
     # 6. Clean up networks, volumes, and containers
-      - name: Teardown environment
-        if: always()
-        run: docker compose down -v
+    - name: Teardown environment
+      if: always()
+      run: docker compose down -v
           
 
       # . Archive and save HTML/XML reports to your GitHub Dashboard
-      - name: Upload Test Report Artifacts
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: specmatic-test-reports
-          path: build/reports/
+    - name: Upload Test Report Artifacts
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+       name: specmatic-test-reports
+       path: build/reports/
