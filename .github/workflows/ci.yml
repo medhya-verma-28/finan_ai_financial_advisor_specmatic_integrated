@@ -25,15 +25,15 @@ jobs:
       run: |
         echo "Monitoring Specmatic test execution..."
         # Wait for the contract runner and resiliency runner containers to finish executing tests
-        docker wait finan_ai_financial_advisor_specmatic_integrated-specmatic-contract-runner-1 || true
-        docker wait finan_ai_financial_advisor_specmatic_integrated-specmatic-resiliency-runner-1 || true
+        docker wait specmatic-contract-runner || true
+        docker wait specmatic-resiliency-runner || true
 
     # 4. Inspect the test exit codes to determine if the CI pass/fails
     - name: Check Test Results
       run: |
         # Inspect exit codes of the runner services to verify 100% success metrics
-        CONTRACT_EXIT=$(docker inspect finan_ai_financial_advisor_specmatic_integrated-specmatic-contract-runner-1 --format='{{.State.ExitCode}}')
-        RESILIENCY_EXIT=$(docker inspect finan_ai_financial_advisor_specmatic_integrated-specmatic-resiliency-runner-1 --format='{{.State.ExitCode}}')
+        CONTRACT_EXIT=$(docker inspect specmatic-contract-runner --format='{{.State.ExitCode}}')
+        RESILIENCY_EXIT=$(docker inspect specmatic-resiliency-runner --format='{{.State.ExitCode}}')
         
         echo "Contract Test Runner Exit Code: $CONTRACT_EXIT"
         echo "Resiliency Test Runner Exit Code: $RESILIENCY_EXIT"
@@ -59,8 +59,6 @@ jobs:
     - name: Teardown environment
       if: always()
       run: docker compose down -v
-          docker compose exec specmatic-contract-runner 
-          docker compose exec specmatic-resiliency-runner
 
       # 7. Archive and save HTML/XML reports to your GitHub Dashboard
     - name: Upload Test Report Artifacts
