@@ -29,7 +29,7 @@ jobs:
         docker wait specmatic-resiliency-runner || true
 
     # 4. Inspect the test exit codes to determine if the CI pass/fails
-    - name: Check Test Results
+    - name: Check Exit Codes
       run: |
         # Inspect exit codes of the runner services to verify 100% success metrics
         CONTRACT_EXIT=$(docker inspect specmatic-contract-runner --format='{{.State.ExitCode}}')
@@ -45,7 +45,7 @@ jobs:
         echo "All Specmatic contract and resiliency tests passed successfully!"
 
     # 5. Dump real-time container logs only if a failure occurs anywhere in the pipeline
-    - name: Print Container Logs on Failure
+    - name: Print  Specmatic Tests Container Logs
       if: always()
       run: |
         echo "=== Flask Application Logs ==="
