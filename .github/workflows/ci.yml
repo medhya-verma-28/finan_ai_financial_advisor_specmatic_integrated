@@ -46,7 +46,7 @@ jobs:
 
     # 5. Dump real-time container logs only if a failure occurs anywhere in the pipeline
     - name: Print Container Logs on Failure
-      if: failure()
+      if: always()
       run: |
         echo "=== Flask Application Logs ==="
         docker compose logs flask-ml-app-service || true
