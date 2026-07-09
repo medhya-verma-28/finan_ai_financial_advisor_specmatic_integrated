@@ -20,7 +20,6 @@ def index():
 
 # Specmatic Actuator Endpoint Mapping
 @app.route('/actuator/mappings', methods=['GET'])
-@app.route('/actuator/mappings', methods=['GET'])
 def mappings():
     """
     Spring Boot Actuator standard '/mappings' endpoint replica.
