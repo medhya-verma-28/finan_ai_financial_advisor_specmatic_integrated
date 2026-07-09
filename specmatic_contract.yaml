@@ -32,7 +32,7 @@ components:
           - spec:
               id: FinanSpec
               baseUrl: "http://flask-ml-app-service:5000"
-        actuatorUrl: "http://flask-ml-app-service:5000/actuator/mappings"
+        actuatorUrl: "http://flask-ml-app-service:5000/actuator"
 
 specmatic:
   settings:
