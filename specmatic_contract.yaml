@@ -40,10 +40,16 @@ specmatic:
       timeoutInMilliseconds: 15000
       schemaResiliencyTests: none
     mock:
-      generative: true           
-
+      generative: true
   governance:
     report:
       formats:
         - html
       outputDirectory: "build/reports/specmatic-contract-tests"
+    coverage:
+      flask:
+        actuator:
+          exclusions:
+            - "/actuator/**"
+            - "/health"
+            - "/metrics"
