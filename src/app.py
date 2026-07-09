@@ -58,30 +58,6 @@ def mappings():
         }
     }), 200
 
-@app.route('/actuator/info', methods=['GET'])
-def info():
-    return jsonify({
-        "app": {
-            "name": "finan_ai_financial_advisor_specmatic_integrated",
-            "version": "1.0.0",
-            "framework": "Flask (Python)"
-        }
-    }), 200
-
-@app.route('/actuator/health', methods=['GET'])
-def health():
-    return jsonify({"status": "UP"}), 200
-
-@app.route('/actuator/metrics', methods=['GET'])
-def metrics():
-    return jsonify({
-        "uptime_seconds": time.time() - START_TIME,
-        "memory": {"percent_used": psutil.virtual_memory().percent},
-        "cpu": {"percent_used": psutil.cpu_percent()}
-    }), 200
-
-
-
 @app.route('/analyze', methods=['POST'])
 def analyze():
     global response_payload
