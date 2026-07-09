@@ -16,6 +16,9 @@ services:
       - financial-test-net
     environment:
       - LANGEXTRACT_API_KEY=${LANGEXTRACT_API_KEY}
+    filter:
+      paths:
+        - /analyze
 
   # 2. Specmatic Contract Testing Runner (ENTERPRISE VERSION)
   specmatic-contract-runner:
