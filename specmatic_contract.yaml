@@ -45,8 +45,4 @@ specmatic:
     report:
       formats:
         - html
-      coverage:
-        api:
-          excludedPaths:
-            - "/actuator/*"
       outputDirectory: "build/reports/specmatic-contract-tests"
