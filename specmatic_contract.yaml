@@ -5,6 +5,8 @@ systemUnderTest:
     $ref: "#/components/services/flask-ml-app-service"
     runOptions:
       $ref: "#/components/runOptions/localFlaskExecution"
+      
+endpointsApi: http://flask-ml-service:5000/actuator/mappings
 
 components:
   sources:
