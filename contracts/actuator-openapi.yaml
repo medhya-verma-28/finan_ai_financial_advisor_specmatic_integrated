@@ -1,0 +1,181 @@
+openapi: 3.0.3
+info:
+  title: Finan-AI Operational Management API
+  description: Management and monitoring endpoints modeled after Spring Boot Actuator.
+  version: 1.0.0
+servers:
+  - url: http://localhost:5000
+    description: Local development Flask instance
+paths:
+  /actuator/health:
+    get:
+      summary: Application Health Status
+      description: Basic liveness and readiness probe for container checkers or load balancers.
+      responses:
+        '200':
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - status
+                properties:
+                  status:
+                    type: string
+                    example: "UP"
+                  components:
+                    type: object
+                    properties:
+                      api:
+                        type: string
+                        example: "healthy"
+
+  /actuator/info:
+    get:
+      summary: Application Metadata
+      description: Returns build, version, and platform configuration details.
+      responses:
+        '200':
+          description: Metadata successfully retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - app
+                  - build
+                properties:
+                  app:
+                    type: object
+                    required:
+                      - name
+                      - version
+                      - framework
+                    properties:
+                      name:
+                        type: string
+                        example: "finan_ai_financial_advisor_specmatic_integrated"
+                      description:
+                        type: string
+                        example: "AI-Powered Financial Advisor"
+                      version:
+                        type: string
+                        example: "1.0.0"
+                      framework:
+                        type: string
+                        example: "Flask (Python)"
+                  build:
+                    type: object
+                    required:
+                      - artifact
+                      - environment
+                    properties:
+                      artifact:
+                        type: string
+                        example: "finan-ml-app"
+                      time:
+                        type: string
+                        format: date-time
+                        example: "2026-07-09T12:20:00Z"
+                      environment:
+                        type: string
+                        example: "production"
+
+  /actuator/metrics:
+    get:
+      summary: System Metrics
+      description: Provides raw usage heuristics including memory footprint and CPU strain.
+      responses:
+        '200':
+          description: Resource telemetry data captured
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - uptime_seconds
+                  - memory
+                  - cpu
+                properties:
+                  uptime_seconds:
+                    type: number
+                    format: float
+                    example: 3600.45
+                  memory:
+                    type: object
+                    required:
+                      - percent_used
+                    properties:
+                      percent_used:
+                        type: number
+                        format: float
+                        example: 45.2
+                  cpu:
+                    type: object
+                    required:
+                      - percent_used
+                    properties:
+                      percent_used:
+                        type: number
+                        format: float
+                        example: 12.8
+
+  /actuator/mappings:
+    get:
+      summary: Application Request Mappings
+      description: Returns a collated list of all mapped REST API paths and execution handlers.
+      responses:
+        '200':
+          description: Mapping matrix successfully generated
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - contexts
+                properties:
+                  contexts:
+                    type: object
+                    properties:
+                      application:
+                        type: object
+                        properties:
+                          mappings:
+                            type: object
+                            properties:
+                              dispatcherServlets:
+                                type: object
+                                properties:
+                                  dispatcherServlet:
+                                    type: array
+                                    items:
+                                      type: object
+                                      required:
+                                        - handler
+                                        - predicate
+                                        - details
+                                      properties:
+                                        handler:
+                                          type: string
+                                          example: "analyze()"
+                                        predicate:
+                                          type: string
+                                          example: "{POST [/analyze]}"
+                                        details:
+                                          type: object
+                                          properties:
+                                            requestMappingConditions:
+                                              type: object
+                                              properties:
+                                                methods:
+                                                  type: array
+                                                  items:
+                                                    type: string
+                                                  example: ["POST"]
+                                                patterns:
+                                                  type: array
+                                                  items:
+                                                    type: string
+                                                  example: ["/analyze"]
+                                                  
