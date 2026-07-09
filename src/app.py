@@ -20,27 +20,24 @@ def index():
 
 # Specmatic Actuator Endpoint Mapping
 @app.route('/actuator/mappings', methods=['GET'])
-def actuator_mappings():
-    contexts = {
-        "application": {
-            "mappings": {
-                "dispatcherServlets": {
-                    "dispatcherServlet": []
-                }
-            }
-        }
-    }
+@app.route('/actuator/mappings', methods=['GET'])
+def mappings():
+    """
+    Spring Boot Actuator standard '/mappings' endpoint replica.
+    Iterates through Flask's internal routing schema to output active application endpoints.
+    """
+    route_details = []
     
-    # Iterate dynamically through all registered routes in Flask
+    # Iterate through all registered rules in the Flask application
     for rule in app.url_map.iter_rules():
-        # Exclude internal flask endpoints and the actuator endpoint itself
-        if rule.endpoint == 'static' or rule.rule.startswith('/actuator'):
+        # Filter down methods to standard REST verbs
+        methods = [method for method in rule.methods if method not in ('OPTIONS', 'HEAD')]
+        if not methods:
             continue
             
-        # Format methods array as expected by Specmatic
-        methods = [method for method in rule.methods if method not in ('OPTIONS', 'HEAD')]
-        
-        contexts["application"]["mappings"]["dispatcherServlets"]["dispatcherServlet"].append({
+        route_details.append({
+            "handler": f"{rule.endpoint}()",
+            "predicate": f"{{{', '.join(methods)} [{rule.rule}]}}",
             "details": {
                 "requestMappingConditions": {
                     "methods": methods,
@@ -48,8 +45,42 @@ def actuator_mappings():
                 }
             }
         })
-        
-    return jsonify(contexts)
+
+    # Wrap inside standard Spring Boot v3/v4 multi-context schema structure
+    return jsonify({
+        "contexts": {
+            "application": {
+                "mappings": {
+                    "dispatcherServlets": {
+                        "dispatcherServlet": route_details
+                    }
+                }
+            }
+        }
+    }), 200
+
+@app.route('/actuator/info', methods=['GET'])
+def info():
+    return jsonify({
+        "app": {
+            "name": "finan_ai_financial_advisor_specmatic_integrated",
+            "version": "1.0.0",
+            "framework": "Flask (Python)"
+        }
+    }), 200
+
+@app.route('/actuator/health', methods=['GET'])
+def health():
+    return jsonify({"status": "UP"}), 200
+
+@app.route('/actuator/metrics', methods=['GET'])
+def metrics():
+    return jsonify({
+        "uptime_seconds": time.time() - START_TIME,
+        "memory": {"percent_used": psutil.virtual_memory().percent},
+        "cpu": {"percent_used": psutil.cpu_percent()}
+    }), 200
+
 
 
 @app.route('/analyze', methods=['POST'])
