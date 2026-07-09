@@ -46,10 +46,3 @@ specmatic:
       formats:
         - html
       outputDirectory: "build/reports/specmatic-contract-tests"
-    coverage:
-      flask:
-        actuator:
-          exclusions:
-            - "/actuator/**"
-            - "/health"
-            - "/metrics"
