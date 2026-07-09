@@ -18,7 +18,7 @@ jobs:
     # 2. Build the application and run all Specmatic test runners via Compose in detached mode.
     # The --build flag ensures the latest Flask Dockerfile updates are pulled in.
     - name: Run Specmatic Test Stack
-      run: docker compose up -d
+      run: docker compose up --build -d
 
     # 3. Block and wait for the Specmatic test runner containers to finish execution
     - name: Wait for Test Completion
