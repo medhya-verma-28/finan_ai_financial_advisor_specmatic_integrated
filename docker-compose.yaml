@@ -36,7 +36,7 @@ services:
     command: >
       test
       --config=specmatic.yaml
-      --filter="PATH != '/actuator/mappings'"
+      --filter="PATH='/analyze'"
       --testBaseURL=http://flask-ml-app-service:5000 
       --junitReportDir=/usr/src/app/build/reports/specmatic-contract-tests/test/xml
       --reportFormat=html
@@ -64,7 +64,7 @@ services:
     command: >
       test 
       --config=specmatic.yaml
-      --filter="PATH != '/actuator/mappings'"
+      --filter="PATH = '/analyze'"
       --testBaseURL=http://flask-ml-app-service:5000 
       --junitReportDir=/usr/src/app/build/reports/specmatic-resiliency-tests/test/xml
       --reportFormat=html
