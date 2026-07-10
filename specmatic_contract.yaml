@@ -41,8 +41,3 @@ specmatic:
       schemaResiliencyTests: none
     mock:
       generative: true
-  governance:
-    report:
-      formats:
-        - html
-      outputDirectory: "build/reports/specmatic-contract-tests"

@@ -38,8 +38,6 @@ services:
       --config=specmatic.yaml
       --filter="PATH='/analyze'"
       --testBaseURL=http://flask-ml-app-service:5000
-      --reportFormat=html
-      --reportDir=/usr/src/app/build/reports/specmatic-contract-tests/test/html
 
   # 3. Specmatic Schema Resiliency Testing Runner (ENTERPRISE VERSION)
   specmatic-resiliency-runner:
@@ -66,4 +64,4 @@ services:
       --filter="PATH = '/analyze'"
       --testBaseURL=http://flask-ml-app-service:5000
       --reportFormat=html
-      --reportDir=/usr/src/app/build/reports/specmatic-resiliency-tests/test/html
+      --reportDir=/usr/src/app/build/reports/specmatic-tests/test/html

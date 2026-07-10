@@ -41,10 +41,4 @@ specmatic:
       schemaResiliencyTests: all
     mock:
       generative: true           
-
-  governance:
-    report:
-      formats:
-        - html
-      outputDirectory: "build/reports/specmatic-resiliency-tests"
           
