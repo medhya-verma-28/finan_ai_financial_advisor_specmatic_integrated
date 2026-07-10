@@ -37,8 +37,7 @@ services:
       test
       --config=specmatic.yaml
       --filter="PATH='/analyze'"
-      --testBaseURL=http://flask-ml-app-service:5000 
-      --junitReportDir=/usr/src/app/build/reports/specmatic-contract-tests/test/xml
+      --testBaseURL=http://flask-ml-app-service:5000
       --reportFormat=html
       --reportDir=/usr/src/app/build/reports/specmatic-contract-tests/test/html
 
@@ -65,7 +64,6 @@ services:
       test 
       --config=specmatic.yaml
       --filter="PATH = '/analyze'"
-      --testBaseURL=http://flask-ml-app-service:5000 
-      --junitReportDir=/usr/src/app/build/reports/specmatic-resiliency-tests/test/xml
+      --testBaseURL=http://flask-ml-app-service:5000
       --reportFormat=html
       --reportDir=/usr/src/app/build/reports/specmatic-resiliency-tests/test/html
